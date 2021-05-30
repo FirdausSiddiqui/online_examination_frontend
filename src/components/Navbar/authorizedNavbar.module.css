@@ -1,0 +1,30 @@
+.container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--navbar-height);
+  z-index: var(--navbar-z);
+  background-color: #fafbfc;
+  box-shadow: var(--shadow-m);
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+
+.nav_title {
+  font-weight: 500;
+  font-size: var(--title-2);
+  margin-left: 10px;
+}
+
+.toggle_btn {
+  padding: 10px;
+  width: 50px;
+  background-color: transparent;
+}
+
+.logOutButton {
+  margin-left: auto;
+  background-color: transparent;
+}

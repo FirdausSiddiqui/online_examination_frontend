@@ -1,0 +1,29 @@
+.container {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px black solid;
+  border-right-color: transparent !important;
+  animation: rotate360 0.5s linear infinite;
+}
+
+.size_s.size_s {
+  width: 20px;
+  height: 20px;
+}
+
+.size_m.size_m {
+  width: 50px;
+  height: 50px;
+}
+
+.size_l.size_l {
+  width: 80px;
+  height: 80px;
+}
+
+@keyframes rotate360 {
+  100% {
+    transform: rotate(360deg);
+  }
+}

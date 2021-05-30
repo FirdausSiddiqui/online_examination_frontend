@@ -1,0 +1,18 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: stretch;
+}
+
+.drawerContainer {
+  flex-basis: auto;
+}
+
+.content {
+  padding-top: calc(var(--navbar-height) + 10px);
+  flex-grow: 1;
+  background-color: var(--medium-purple-color);
+  display: flex;
+  flex-direction: column;
+}

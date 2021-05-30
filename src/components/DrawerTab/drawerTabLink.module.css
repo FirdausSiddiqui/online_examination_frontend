@@ -1,0 +1,16 @@
+.drawerTabLink {
+  background-color: transparent;
+  padding: 15px;
+  margin: 15px 5px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.tabName {
+  font-size: 16px;
+  margin-left: 8px;
+}
+
+.iconName,
+.tabName {
+  color: rgb(45, 51, 78);
+}

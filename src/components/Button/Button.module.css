@@ -1,0 +1,59 @@
+.container {
+  font-size: var(--btn-m);
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+.secondary {
+  background-color: white;
+  border: 1px #e0e5e9 solid;
+  border-radius: 3px;
+  color: var(--secondary-color);
+  font-weight: bold;
+}
+
+.at {
+  width: auto;
+  height: auto;
+}
+
+.sm {
+  width: 80px;
+  height: 40px;
+}
+
+.md {
+  width: 150px;
+  height: 50px;
+}
+
+.lg {
+  width: 200px;
+  height: 50px;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+.sm_rounded {
+  border-radius: 10px;
+}
+
+.md_rounded {
+  border-radius: 25px;
+}
+
+.lg_rounded {
+  border-radius: 50px;
+}
+
+.shadow:hover {
+  box-shadow: var(--shadow-m);
+}
