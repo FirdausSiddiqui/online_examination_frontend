@@ -1,7 +1,8 @@
 import { TOGGLE_DRAWER, OPEN_DRAWER, CLOSE_DRAWER } from '../actions';
 
-const initialStore = {
-  isDrawerOpen: false
+export const initialStore = {
+  isDrawerOpen: false,
+  questions: []
 };
 
 const appData = (store = initialStore, action) => {

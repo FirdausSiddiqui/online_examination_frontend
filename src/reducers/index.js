@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import AppDataReducer from './appData';
+import QuestionDataReducer from './questionData';
 
 const appReducer = combineReducers({
-  appData: AppDataReducer
+  appData: AppDataReducer,
+  questionData: QuestionDataReducer
 });
 
 const rootReducer = (store, action) => {

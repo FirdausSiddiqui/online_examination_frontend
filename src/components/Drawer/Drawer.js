@@ -25,8 +25,13 @@ const Drawer = ({ isDrawerActive, isMobileView }) => {
       />
       <DrawerTab
         tabName="Question Bank"
-        link="auth/questionBank"
+        link="/auth/questionBank"
         iconName="fas fa-book"
+      />
+      <DrawerTab
+        tabName="New Exam Paper"
+        link="/auth/uploadQuestion"
+        iconName="fas fa-upload"
       />
     </div>
   );
