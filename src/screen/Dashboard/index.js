@@ -1,7 +1,8 @@
 import React from 'react';
+import TeacherDashboard from './TeacherDashboard';
 
 const Dashboard = () => {
-  return <>Dashboard</>;
+  return <TeacherDashboard />;
 };
 
 export default Dashboard;

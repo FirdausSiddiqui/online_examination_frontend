@@ -55,6 +55,10 @@ button {
   --shadow-m: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   --shadow-l: 0 1rem 3rem rgba(0, 0, 0, 0.175);
 
+  --gray-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12),
+    0 2px 2px rgba(0, 0, 0, 0.12), 0 4px 4px rgba(0, 0, 0, 0.12),
+    0 8px 8px rgba(0, 0, 0, 0.12), 0 16px 16px rgba(0, 0, 0, 0.12);
+
   /*=========== Font sizes ==========*/
   --heading-l: 45px;
   --heading-m: 30px;

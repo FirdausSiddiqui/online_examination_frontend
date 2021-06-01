@@ -9,7 +9,7 @@ const AuthorizedRoutes = () => {
   return (
     <Suspense fallback={<Fallback />}>
       <Switch>
-        <Route exact path="/auth/uploadQuestion" component = {UploadQuestion} />
+        <Route exact path="/auth/uploadQuestion" component={UploadQuestion} />
         <Route exact path="/auth/dashboard" component={Dashboard} />
       </Switch>
     </Suspense>

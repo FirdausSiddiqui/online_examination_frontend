@@ -1,0 +1,22 @@
+.card {
+  padding: 0.5% !important;
+  display: flex;
+  flex-direction: column;
+  margin: 1%;
+}
+.card:hover {
+  transform: translate3d(0, 5px, 6em);
+  transition: 0.3s;
+  box-shadow: var(--gray-box-shadow);
+  cursor: pointer;
+}
+.cardImg {
+  height: 20vh !important;
+  object-fit: contain;
+}
+.cardTitle {
+  font-size: var(--title-1) !important;
+}
+.cardDate {
+  align-self: flex-end;
+}
