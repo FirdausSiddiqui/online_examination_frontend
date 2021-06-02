@@ -10,7 +10,7 @@
 }
 
 .content {
-  padding-top: calc(var(--navbar-height) + 10px);
+  padding-top: calc(var(--navbar-height));
   flex-grow: 1;
   background-color: var(--medium-purple-color);
   display: flex;

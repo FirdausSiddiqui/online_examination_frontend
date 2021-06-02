@@ -1,0 +1,104 @@
+.homeContent {
+  background-image: url('../../images/dashboard.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  margin-top: 0;
+  display: flex;
+}
+
+.updateContainer {
+  margin: 5% 5% auto auto;
+  padding: 20px 30px;
+  width: 450px;
+  height: 70vh;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  background-color: rgb(228, 211, 211);
+  border-radius: 5%;
+}
+
+.updateContainer > h1 {
+  border-bottom: 2px;
+  border-color: black;
+  border-bottom-style: solid;
+  padding: 5px;
+  margin-bottom: 15px;
+}
+
+.noticeDetails {
+  overflow: scroll;
+  height: 55vh;
+  margin-bottom: 20px;
+}
+
+.homeDateContainer {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  height: 300px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  border-bottom-left-radius: 15%;
+  border-bottom-right-radius: 15%;
+  margin-left: 10%;
+  background-color: white;
+}
+
+.homeMonth {
+  box-shadow: rgba(175, 23, 18, 0.856) 0px 30px 60px -12px inset,
+    rgb(255, 0, 0) 0px 18px 36px -18px inset;
+  width: 100%;
+  padding: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
+  font-size: 2.8rem;
+  color: white;
+  flex: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 0 0 3px #ff0000, 0 0 5px #00000000;
+}
+
+.homeDay {
+  font-size: 2.5rem;
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.homeDate {
+  font-size: 5rem;
+  font-weight: bold;
+  flex: 2;
+}
+
+.homeHeading {
+  font-family: cursive;
+  padding: 25px;
+  align-self: flex-start;
+  font-size: 4rem;
+  color: white;
+  font-weight: bold;
+}
+
+.headerAndDate {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 70vh;
+}
+
+.dashboardImageContainer {
+  height: 300px;
+  width: 300px;
+}
+
+.image {
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+}
