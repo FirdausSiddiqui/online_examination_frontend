@@ -9,11 +9,20 @@
 .questionsHeader {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
-.questionsHeaderInput:first-of-type {
-  margin-left: 0 !important;
+.questionsHeaderInput {
+  width: 40% !important;
+  margin: 1%;
 }
 .submitBtn {
   width: 25%;
   align-self: center;
+}
+
+@media only screen and (max-width: 768px) {
+  .questionsHeaderInput {
+    width: 100% !important;
+  }
 }

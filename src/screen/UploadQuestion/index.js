@@ -6,6 +6,7 @@ import AddQuestion from '../../components/AddQuestion';
 
 const UploadQuestion = () => {
   const { questionList, addBlankQuestion } = useQuestions();
+  const [paperName, setPaperName] = useState('');
   const [subCode, setSubCode] = useState('');
   const [teacherCode, setTeacherCode] = useState('');
   const [semester, setSemester] = useState('');
@@ -17,25 +18,32 @@ const UploadQuestion = () => {
   };
   const paperDetails = [
     {
+      value: paperName,
+      setter: setPaperName,
+      label: 'Paper Name',
+      id: 'paper-name',
+      placeholder: 'Example: 1st Internal'
+    },
+    {
       value: subCode,
       setter: setSubCode,
       label: 'Subject Code',
       id: 'sub-code',
-      placeholder: 'CS101A'
+      placeholder: 'Example: CS101A'
     },
     {
       value: semester,
       setter: setSemester,
       label: 'Semester',
       id: 'semester',
-      placeholder: 1
+      placeholder: 'Example: 1'
     },
     {
       value: teacherCode,
       setter: setTeacherCode,
       label: 'Teacher Code',
       id: 'teacher-code',
-      placeholder: 'MDu'
+      placeholder: 'Example: MDu'
     }
   ];
   console.log(questionList);
