@@ -1,5 +1,5 @@
 import React from 'react';
-import './section.module.css';
+import './section.css';
 
 const Section = ({ id, children }) => {
   return (

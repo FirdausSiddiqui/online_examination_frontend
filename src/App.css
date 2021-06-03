@@ -1,15 +1,16 @@
-.card-container{
-    color: red;
-    width:80%;
-    height: 80%;
-    border-color: black;
-    text-align: center;
-    display: inline;
+.card-container {
+  color: red;
+  width: 80%;
+  height: 80%;
+  border-color: black;
+  text-align: center;
+  display: inline;
 }
-body{
-    align-content: center;
-    align-items: center;
+body {
+  align-content: center;
+  align-items: center;
 }
-input,select{
-    margin:5px;
+input,
+select {
+  margin: 5px;
 }
