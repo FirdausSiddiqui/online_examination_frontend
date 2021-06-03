@@ -1,0 +1,13 @@
+.customTooltip {
+  background-color: var(--light-blue-color);
+  border-radius: 5px;
+  box-shadow: var(--shadow-l);
+  padding: 10px;
+}
+.marks {
+  font-weight: 600;
+}
+.tickWrapper {
+  height: 150px;
+  width: 300px;
+}

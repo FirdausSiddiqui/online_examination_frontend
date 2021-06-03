@@ -2,6 +2,7 @@ import { SectionContent } from '../../components/Section';
 import styles from './performance.module.css';
 import performanceImg from '../../images/rising.svg';
 import { Container } from 'react-bootstrap';
+import Graph from '../../components/Graph.js';
 
 const Performance = () => {
   return (
@@ -17,6 +18,7 @@ const Performance = () => {
       <Container>{/* The Exam Result Card Container */}</Container>
       <Container>
         <h4>Performance Graph</h4>
+        <Graph />
       </Container>
     </SectionContent>
   );
