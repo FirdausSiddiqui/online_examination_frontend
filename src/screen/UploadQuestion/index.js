@@ -66,14 +66,7 @@ const UploadQuestion = () => {
         console.log(error);
       });
   };
-  // useEffect(() => {
-  //   const getQuestionPapers = async() => {
-  //     await axios.get('/questionBank')
-  //     .then((res) => console.log(res.data))
-  //     .catch((err) => console.log(err))
-  //   };
-  //   getQuestionPapers();
-  // },[]);
+  
   return (
     <main className="page">
       <div className={`container ${styles.questionsContainer} mt-4`}>

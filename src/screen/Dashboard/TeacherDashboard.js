@@ -18,7 +18,7 @@ const TeacherDashboard = () => {
         </Row>
       </Container>
       <h4 className="mt-4">Previous Papers</h4>
-      <Container className={styles.container}>
+      <Container >
         <Row xs={1} sm={2} md={3} lg={4} xl={5}>
           <ExamCard code="CS 802D" title="1st Internal" />
           <ExamCard code="CS 203" title="1st Internal" />

@@ -10,3 +10,7 @@ export const debounce = (callback, timeout = 500) => {
     }, timeout);
   };
 };
+
+export const sortByDate = (data) => {
+  return data.sort((a, b) => a.added > b.added? -1: 1);
+}
