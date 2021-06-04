@@ -66,7 +66,7 @@ const UploadQuestion = () => {
         console.log(error);
       });
   };
-  
+
   return (
     <main className="page">
       <div className={`container ${styles.questionsContainer} mt-4`}>
