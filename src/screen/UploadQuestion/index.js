@@ -1,8 +1,9 @@
 import styles from './uploadQuestion.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, FormControl, InputGroup } from 'react-bootstrap';
 import useQuestions from '../../hooks/useQuestions';
 import AddQuestion from '../../components/AddQuestion';
+import axios from '../../axios';
 
 const UploadQuestion = () => {
   const { questionList, addBlankQuestion } = useQuestions();
@@ -10,6 +11,7 @@ const UploadQuestion = () => {
   const [subCode, setSubCode] = useState('');
   const [teacherCode, setTeacherCode] = useState('');
   const [semester, setSemester] = useState('');
+  const currDate = new Date().toLocaleDateString();
   const initialQuestionState = {
     title: '',
     options: ['', '', '', ''],
@@ -46,7 +48,32 @@ const UploadQuestion = () => {
       placeholder: 'Example: MDu'
     }
   ];
-  console.log(questionList);
+
+  const submitQuestionPaper = async (e) => {
+    e.preventDefault();
+    axios
+      .post('/questionBank', {
+        subjectCode: subCode,
+        name: paperName,
+        added: currDate,
+        question: questionList,
+        teacherCode
+      })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  // useEffect(() => {
+  //   const getQuestionPapers = async() => {
+  //     await axios.get('/questionBank')
+  //     .then((res) => console.log(res.data))
+  //     .catch((err) => console.log(err))
+  //   };
+  //   getQuestionPapers();
+  // },[]);
   return (
     <main className="page">
       <div className={`container ${styles.questionsContainer} mt-4`}>
@@ -91,7 +118,8 @@ const UploadQuestion = () => {
             type="submit"
             variant="info"
             className={`mt-4 mb-3 ${styles.submitBtn}`}
-            disabled={subCode === '' || teacherCode === '' || semester === ''}>
+            disabled={subCode === '' || teacherCode === '' || semester === ''}
+            onClick={(e) => submitQuestionPaper(e)}>
             Submit Question Paper
           </Button>
         )}
