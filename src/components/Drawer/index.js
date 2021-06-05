@@ -24,7 +24,6 @@ const DrawerContainer = () => {
       debounceFuncRef.current();
     }
   }, [dimensions.width]);
-
   if (isMobile) {
     return (
       <MobileDrawer

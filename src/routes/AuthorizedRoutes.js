@@ -1,6 +1,8 @@
 import React, { Suspense } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Dashboard from '../screen/Dashboard';
+import QuestionBank from '../screen/QuestionBank';
+import UploadQuestion from '../screen/UploadQuestion';
 
 const AuthorizedRoutes = () => {
   const Fallback = () => <p>Loading Page ...</p>;
@@ -8,6 +10,8 @@ const AuthorizedRoutes = () => {
   return (
     <Suspense fallback={<Fallback />}>
       <Switch>
+        <Route exact path="/auth/questionBank" component={QuestionBank} />
+        <Route exact path="/auth/uploadQuestion" component={UploadQuestion} />
         <Route exact path="/auth/dashboard" component={Dashboard} />
       </Switch>
     </Suspense>
