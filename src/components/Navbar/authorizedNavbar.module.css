@@ -27,4 +27,5 @@
 .logOutButton {
   margin-left: auto;
   background-color: transparent;
+  width: fit-content;
 }

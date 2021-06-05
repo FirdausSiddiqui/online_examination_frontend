@@ -18,7 +18,7 @@ const ExamCard = ({ code, title, forNewExam, added }) => {
         <Card.Subtitle className={styles.cardSubtitle}>
           {title}
           {!forNewExam && (
-            <small className={styles.cardDate}> {added.substr(0, 10)} </small>
+            <small className={styles.cardDate}> {added?.substr(0, 10)} </small>
           )}
         </Card.Subtitle>
       </Card.Body>

@@ -11,9 +11,9 @@ export const debounce = (callback, timeout = 500) => {
   };
 };
 
-
 export const sortByDate = (data) => {
   return data.sort((a, b) => (a.added > b.added ? -1 : 1));
+};
 
 export const getDate = (date) => {
   const day = date?.getDate();
