@@ -42,14 +42,11 @@ const useQuestions = () => {
     [dispatch]
   );
 
-  const resetPaper = useCallback(
-    () => {
-      dispatch({
-        type: RESET_PAPER
-      })
-    },
-    [dispatch]
-  );
+  const resetPaper = useCallback(() => {
+    dispatch({
+      type: RESET_PAPER
+    });
+  }, [dispatch]);
 
   return {
     questionList,

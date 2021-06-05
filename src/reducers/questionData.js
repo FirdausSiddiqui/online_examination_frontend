@@ -39,7 +39,7 @@ const questionData = (store = initialStore, action) => {
       return {
         ...store,
         questions: []
-      }
+      };
     }
     default:
       return store;
