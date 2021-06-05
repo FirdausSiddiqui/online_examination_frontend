@@ -1,5 +1,4 @@
 import { Container, Row } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
 import ExamCard from '../../components/ExamCard';
 import styles from './dashboard.module.css';
 
@@ -10,13 +9,6 @@ const TeacherDashboard = ({ userData }) => {
         <h2>Welcome,</h2>
         <h1>{userData.name}.</h1>
       </section>
-      <Container>
-        <Row>
-          <NavLink className="link" to="/auth/uploadQuestion">
-            <ExamCard code="New Exam Paper" forNewExam={true} />
-          </NavLink>
-        </Row>
-      </Container>
       <h4 className="mt-4">Previous Papers</h4>
       <Container>
         <Row xs={1} sm={2} md={3} lg={4} xl={5}>

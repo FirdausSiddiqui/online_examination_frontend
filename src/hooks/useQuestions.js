@@ -3,7 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   ADD_BLANK_QUESTION,
   DELETE_QUESTION,
-  UPDATE_QUESTION
+  UPDATE_QUESTION,
+  RESET_PAPER
 } from '../actions';
 import { questions } from '../selectors/questionData';
 
@@ -41,11 +42,21 @@ const useQuestions = () => {
     [dispatch]
   );
 
+  const resetPaper = useCallback(
+    () => {
+      dispatch({
+        type: RESET_PAPER
+      })
+    },
+    [dispatch]
+  );
+
   return {
     questionList,
     addBlankQuestion,
     updateQuestion,
-    deleteQuestion
+    deleteQuestion,
+    resetPaper
   };
 };
 
