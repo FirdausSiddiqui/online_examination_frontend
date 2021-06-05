@@ -2,8 +2,10 @@ import { TOGGLE_DRAWER, OPEN_DRAWER, CLOSE_DRAWER } from '../actions';
 
 export const initialStore = {
   isDrawerOpen: false,
-  questions: [],
-  userType: 'teacher'
+  user: {
+    name: 'Rohit Mondal',
+    type: 'teacher'
+  }
 };
 
 const appData = (store = initialStore, action) => {

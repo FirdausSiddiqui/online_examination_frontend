@@ -3,7 +3,7 @@ import DrawerTab from '../DrawerTab';
 
 import styles from './drawer.module.css';
 
-const Drawer = ({ isDrawerActive, isMobileView }) => {
+const Drawer = ({ isDrawerActive, isMobileView, userType }) => {
   const isZeroWidth = useMemo(() => {
     return !isDrawerActive && !isMobileView;
   }, [isDrawerActive, isMobileView]);
@@ -28,11 +28,13 @@ const Drawer = ({ isDrawerActive, isMobileView }) => {
         link="/auth/questionBank"
         iconName="fas fa-book"
       />
-      <DrawerTab
-        tabName="New Exam Paper"
-        link="/auth/uploadQuestion"
-        iconName="fas fa-upload"
-      />
+      {userType == 'teacher' && (
+        <DrawerTab
+          tabName="New Exam Paper"
+          link="/auth/uploadQuestion"
+          iconName="fas fa-upload"
+        />
+      )}
     </div>
   );
 };

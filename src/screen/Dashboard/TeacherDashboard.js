@@ -3,12 +3,12 @@ import { NavLink } from 'react-router-dom';
 import ExamCard from '../../components/ExamCard';
 import styles from './dashboard.module.css';
 
-const TeacherDashboard = () => {
+const TeacherDashboard = ({ userData }) => {
   return (
     <main className={styles.dashboard}>
       <section className="mb-4">
         <h2>Welcome,</h2>
-        <h1>Sreejit De.</h1>
+        <h1>{userData.name}.</h1>
       </section>
       <Container>
         <Row>

@@ -3,7 +3,10 @@ import {
   UPDATE_QUESTION,
   DELETE_QUESTION
 } from '../actions';
-import { initialStore } from './appData';
+
+export const initialStore = {
+  questions: []
+};
 
 const questionData = (store = initialStore, action) => {
   const { type, payload, index } = action;
