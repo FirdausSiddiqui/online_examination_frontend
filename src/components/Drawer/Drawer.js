@@ -28,7 +28,7 @@ const Drawer = ({ isDrawerActive, isMobileView, userType }) => {
         link="/auth/questionBank"
         iconName="fas fa-book"
       />
-      {userType == 'teacher' && (
+      {userType === 'teacher' && (
         <DrawerTab
           tabName="New Exam Paper"
           link="/auth/uploadQuestion"

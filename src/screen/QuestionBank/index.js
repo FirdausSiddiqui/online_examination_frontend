@@ -2,26 +2,53 @@ import { useEffect, useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import ExamCard from '../../components/ExamCard';
 import axios from '../../axios';
-import { sortByDate } from '../../helper';
 import LoaderContainer from '../../components/Loader';
+import { connect } from 'react-redux';
 
-const QuestionBank = () => {
-  const [questionPaperList, setQuestionPaperList] = useState([]);
+const QuestionBank = ({ userData }) => {
+  const { type, dept, sem } = userData;
+  const [subjectList, setSubjectList] = useState([]);
+  const [questionList, setQuestionList] = useState([]);
+  const [subjectCode, setSubjectCode] = useState('');
   const [loading, setLoading] = useState(false);
 
+  const teacherParams = {
+    type,
+    tdept: dept
+  };
+  const studentParams = {
+    type,
+    dept,
+    sem
+  };
   useEffect(() => {
     const getQuestionPapers = async () => {
       await axios
-        .get('/questionBank')
+        .get('/questionBank', {
+          params: type === 'teacher' ? teacherParams : studentParams
+        })
         .then((res) => {
-          setQuestionPaperList(sortByDate(res.data));
+          setSubjectList(res.data);
           setLoading(false);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err.message));
+    };
+    const getSubjectQuestions = async () => {
+      await axios
+        .get(`/questionBank/${subjectCode}`)
+        .then((res) => {
+          setQuestionList(res.data);
+          setLoading(false);
+        })
+        .catch((err) => console.log(err.message));
     };
     setLoading(true);
-    getQuestionPapers();
-  }, []);
+    if (subjectCode === '') {
+      getQuestionPapers();
+    } else {
+      getSubjectQuestions();
+    }
+  }, [subjectCode]);
   return (
     <>
       {loading ? (
@@ -29,17 +56,24 @@ const QuestionBank = () => {
       ) : (
         <Container>
           <Row xs={1} sm={2} md={3} lg={4} xl={5}>
-            {questionPaperList.map((paper, index) => {
-              const { subjectCode, added, name } = paper;
-              return (
-                <ExamCard
-                  key={index}
-                  code={subjectCode}
-                  title={name ? name : 'Class Test'}
-                  added={added}
-                />
-              );
-            })}
+            {subjectCode === '' &&
+              subjectList.map((subject, index) => {
+                const { code, name } = subject;
+                return (
+                  <ExamCard
+                    key={index}
+                    code={name}
+                    title={code}
+                    forSubject={true}
+                    setSubjectCode={setSubjectCode}
+                  />
+                );
+              })}
+            {subjectCode !== '' &&
+              questionList.map((question, index) => {
+                const { subjectCode, name } = question;
+                return <ExamCard key={index} code={name} title={subjectCode} />;
+              })}
           </Row>
         </Container>
       )}
@@ -47,4 +81,8 @@ const QuestionBank = () => {
   );
 };
 
-export default QuestionBank;
+const mapStateToProps = (store, props) => ({
+  userData: store.appData.user
+});
+
+export default connect(mapStateToProps, null)(QuestionBank);

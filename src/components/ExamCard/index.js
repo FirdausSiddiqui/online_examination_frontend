@@ -4,7 +4,14 @@ import cardImg from '../../assets/images/cpu.svg';
 import cardImg2 from '../../assets/images/cpu-2.svg';
 import addImg from '../../assets/images/add.svg';
 
-const ExamCard = ({ code, title, forNewExam, added }) => {
+const ExamCard = ({
+  code,
+  title,
+  forNewExam,
+  added,
+  forSubject,
+  setSubjectCode
+}) => {
   const images = [cardImg, cardImg2];
   return (
     <Card bg="light" style={{ width: '15vw' }} className={styles.card}>
@@ -23,8 +30,12 @@ const ExamCard = ({ code, title, forNewExam, added }) => {
         </Card.Subtitle>
       </Card.Body>
       {!forNewExam && (
-        <Button size="sm" variant="info" className="mt-3">
-          Details
+        <Button
+          size="sm"
+          variant="info"
+          className="mt-3"
+          onClick={forSubject && (() => setSubjectCode(title))}>
+          {forSubject ? 'Questions' : 'Details'}
         </Button>
       )}
     </Card>
