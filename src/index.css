@@ -26,6 +26,10 @@ button {
 .page {
   padding: 2% 3%;
 }
+.row-center {
+  flex-flow: row wrap;
+  justify-content: center;
+}
 .rc {
   display: flex;
   justify-content: center;

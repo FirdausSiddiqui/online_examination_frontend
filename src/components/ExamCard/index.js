@@ -1,8 +1,10 @@
 import styles from './examCard.module.css';
 import { Button, Card } from 'react-bootstrap';
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 import cardImg from '../../assets/images/cpu.svg';
 import cardImg2 from '../../assets/images/cpu-2.svg';
 import addImg from '../../assets/images/add.svg';
+import { useMemo } from 'react';
 
 const ExamCard = ({
   code,
@@ -13,15 +15,27 @@ const ExamCard = ({
   setSubjectCode
 }) => {
   const images = [cardImg, cardImg2];
+  const { dimensions } = useWindowDimensions();
+  const isMobile = useMemo(() => {
+    return dimensions.width <= 800;
+  }, [dimensions.width]);
   return (
-    <Card bg="light" style={{ width: '15vw' }} className={styles.card}>
+    <Card
+      bg="light"
+      style={{ width: isMobile ? '12vw' : '15vw' }}
+      className={styles.card}>
       <Card.Img
         variant="top"
         src={forNewExam ? addImg : images[Math.round(Math.random())]}
-        className={styles.cardImg}
+        className={`${styles.cardImg} ${isMobile && styles.mobileCardImg}`}
       />
       <Card.Body className={`${styles.cardBody} p-1 pt-3 pb-2`}>
-        <Card.Title className={styles.cardTitle}>{code}</Card.Title>
+        <Card.Title
+          className={`${styles.cardTitle} ${
+            isMobile && styles.mobileCardTitle
+          }`}>
+          {code}
+        </Card.Title>
         <Card.Subtitle className={styles.cardSubtitle}>
           {title}
           {!forNewExam && (

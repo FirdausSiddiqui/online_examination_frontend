@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import ExamCard from '../../components/ExamCard';
 import axios from '../../axios';
 import LoaderContainer from '../../components/Loader';
 import { connect } from 'react-redux';
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 const QuestionBank = ({ userData }) => {
   const { type, dept, sem } = userData;
@@ -11,6 +12,10 @@ const QuestionBank = ({ userData }) => {
   const [questionList, setQuestionList] = useState([]);
   const [subjectCode, setSubjectCode] = useState('');
   const [loading, setLoading] = useState(false);
+  const { dimensions } = useWindowDimensions();
+  const isMobile = useMemo(() => {
+    return dimensions.width <= 800;
+  }, [dimensions.width]);
 
   const teacherParams = {
     type,
@@ -50,12 +55,18 @@ const QuestionBank = ({ userData }) => {
     }
   }, [subjectCode]);
   return (
-    <>
+    <main className="page">
       {loading ? (
         <LoaderContainer specialColor="#25A2B8" />
       ) : (
         <Container>
-          <Row xs={1} sm={2} md={3} lg={4} xl={5}>
+          <Row
+            xs={1}
+            sm={2}
+            md={3}
+            lg={4}
+            xl={5}
+            className={isMobile && 'row-center'}>
             {subjectCode === '' &&
               subjectList.map((subject, index) => {
                 const { code, name } = subject;
@@ -71,13 +82,20 @@ const QuestionBank = ({ userData }) => {
               })}
             {subjectCode !== '' &&
               questionList.map((question, index) => {
-                const { subjectCode, name } = question;
-                return <ExamCard key={index} code={name} title={subjectCode} />;
+                const { subjectCode, name, added } = question;
+                return (
+                  <ExamCard
+                    key={index}
+                    code={name}
+                    title={subjectCode}
+                    added={added}
+                  />
+                );
               })}
           </Row>
         </Container>
       )}
-    </>
+    </main>
   );
 };
 
