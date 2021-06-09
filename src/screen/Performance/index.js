@@ -2,7 +2,7 @@ import { SectionContent } from '../../components/Section';
 import styles from './performance.module.css';
 import performanceImg from '../../images/rising.svg';
 import { Container } from 'react-bootstrap';
-import Graph from '../../components/Graph.js';
+import Graph from '../../components/Graph';
 
 const Performance = () => {
   return (
