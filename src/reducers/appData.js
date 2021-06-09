@@ -1,10 +1,17 @@
-import { TOGGLE_DRAWER, OPEN_DRAWER, CLOSE_DRAWER } from '../actions';
+import {
+  TOGGLE_DRAWER,
+  OPEN_DRAWER,
+  CLOSE_DRAWER,
+  ROUTE_CHANGE
+} from '../actions';
 
 export const initialStore = {
   isDrawerOpen: false,
+  routeChange: false,
   user: {
     name: 'Rohit Mondal',
-    type: 'teacher'
+    sem: 8,
+    type: 'student'
   }
 };
 
@@ -32,6 +39,14 @@ const appData = (store = initialStore, action) => {
         isDrawerOpen: false
       };
     }
+
+    case ROUTE_CHANGE: {
+      return {
+        ...store,
+        routeChange: true
+      };
+    }
+
     default: {
       return store;
     }

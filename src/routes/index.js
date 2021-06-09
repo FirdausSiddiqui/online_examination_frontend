@@ -19,7 +19,7 @@ const RootRoute = ({ userData }) => {
           <Drawer userType={userData.type} />
         </div>
         <div className={styles.content}>
-          <AuthorizedRoutes />
+          <AuthorizedRoutes userType={userData.type} />
         </div>
       </div>
     </>

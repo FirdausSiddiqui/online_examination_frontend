@@ -1,5 +1,5 @@
 import styles from './uploadQuestion.module.css';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Button, FormControl, InputGroup } from 'react-bootstrap';
 import useQuestions from '../../hooks/useQuestions';
 import AddQuestion from '../../components/AddQuestion';
