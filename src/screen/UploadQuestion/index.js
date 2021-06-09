@@ -4,9 +4,11 @@ import { Button, FormControl, InputGroup } from 'react-bootstrap';
 import useQuestions from '../../hooks/useQuestions';
 import AddQuestion from '../../components/AddQuestion';
 import axios from '../../axios';
+import { useHistory } from 'react-router-dom';
 
 const UploadQuestion = () => {
-  const { questionList, addBlankQuestion } = useQuestions();
+  const history = useHistory();
+  const { questionList, addBlankQuestion, resetPaper } = useQuestions();
   const [paperName, setPaperName] = useState('');
   const [subCode, setSubCode] = useState('');
   const [teacherCode, setTeacherCode] = useState('');
@@ -61,6 +63,8 @@ const UploadQuestion = () => {
       })
       .then((response) => {
         console.log(response.data);
+        resetPaper();
+        history.push('/auth/questionBank');
       })
       .catch((error) => {
         console.log(error);

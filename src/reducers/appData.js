@@ -4,7 +4,8 @@ export const initialStore = {
   isDrawerOpen: false,
   user: {
     name: 'Rohit Mondal',
-    type: 'teacher'
+    type: 'teacher',
+    dept: 'Basic Science'
   }
 };
 

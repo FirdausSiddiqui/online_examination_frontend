@@ -11,7 +11,7 @@ const Dashboard = ({ userData }) => {
 
   return (
     <SectionContent>
-      {userData.type == 'student' ? (
+      {userData.type === 'student' ? (
         <StudentDashboard userData={userData} />
       ) : (
         <TeacherDashboard userData={userData} />
