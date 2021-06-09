@@ -1,7 +1,8 @@
 import {
   ADD_BLANK_QUESTION,
   UPDATE_QUESTION,
-  DELETE_QUESTION
+  DELETE_QUESTION,
+  RESET_PAPER
 } from '../actions';
 
 export const initialStore = {
@@ -32,6 +33,12 @@ const questionData = (store = initialStore, action) => {
       return {
         ...store,
         questions: newQuestions
+      };
+    }
+    case RESET_PAPER: {
+      return {
+        ...store,
+        questions: []
       };
     }
     default:

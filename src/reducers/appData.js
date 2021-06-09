@@ -11,7 +11,8 @@ export const initialStore = {
   user: {
     name: 'Rohit Mondal',
     sem: 8,
-    type: 'student'
+    type: 'teacher',
+    dept: 'Basic Science'
   }
 };
 

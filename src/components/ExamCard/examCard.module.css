@@ -25,3 +25,10 @@
   align-self: flex-end;
   color: var(--secondary-color);
 }
+
+.mobileCardImg {
+  height: 15vh !important;
+}
+.mobileCardTitle {
+  font-size: var(--title-2) !important;
+}

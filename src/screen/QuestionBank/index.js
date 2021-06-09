@@ -1,51 +1,106 @@
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useMemo, useState } from 'react';
 import { Container, Row } from 'react-bootstrap';
 import ExamCard from '../../components/ExamCard';
 import axios from '../../axios';
-import { sortByDate } from '../../helper';
-import { GET_QUESTION_BANK } from '../../actions';
+import LoaderContainer from '../../components/Loader';
+import { connect } from 'react-redux';
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 
-const QuestionBank = () => {
-  const dispatch = useDispatch();
-  const [questionPaperList, setQuestionPaperList] = useState([]);
+const QuestionBank = ({ userData }) => {
+  const { type, dept, sem } = userData;
+  const [subjectList, setSubjectList] = useState([]);
+  const [questionList, setQuestionList] = useState([]);
+  const [subjectCode, setSubjectCode] = useState('');
+  const [loading, setLoading] = useState(false);
+  const { dimensions } = useWindowDimensions();
+  const isMobile = useMemo(() => {
+    return dimensions.width <= 800;
+  }, [dimensions.width]);
 
+  const teacherParams = {
+    type,
+    tdept: dept
+  };
+  const studentParams = {
+    type,
+    dept,
+    sem
+  };
   useEffect(() => {
     const getQuestionPapers = async () => {
       await axios
-        .get('/questionBank')
-        .then((res) => {
-          setQuestionPaperList(sortByDate(res.data));
-          dispatch({
-            type: GET_QUESTION_BANK,
-            payload: sortByDate(res.data)
-          });
+        .get('/questionBank', {
+          params: type === 'teacher' ? teacherParams : studentParams
         })
-        .catch((err) => console.log(err));
+        .then((res) => {
+          setSubjectList(res.data);
+          setLoading(false);
+        })
+        .catch((err) => console.log(err.message));
     };
-    getQuestionPapers();
-  }, []);
-
-  useEffect(() => {
-    console.log(questionPaperList);
-  }, [questionPaperList]);
+    const getSubjectQuestions = async () => {
+      await axios
+        .get(`/questionBank/${subjectCode}`)
+        .then((res) => {
+          setQuestionList(res.data);
+          setLoading(false);
+        })
+        .catch((err) => console.log(err.message));
+    };
+    setLoading(true);
+    if (subjectCode === '') {
+      getQuestionPapers();
+    } else {
+      getSubjectQuestions();
+    }
+  }, [subjectCode]);
   return (
-    <Container>
-      <Row xs={1} sm={2} md={3} lg={4} xl={5}>
-        {questionPaperList.map((paper, index) => {
-          const { subjectCode, added, name } = paper;
-          return (
-            <ExamCard
-              key={index}
-              code={subjectCode}
-              title={name ? name : 'Class Test'}
-              added={added}
-            />
-          );
-        })}
-      </Row>
-    </Container>
+    <main className="page">
+      {loading ? (
+        <LoaderContainer specialColor="#25A2B8" />
+      ) : (
+        <Container>
+          <Row
+            xs={1}
+            sm={2}
+            md={3}
+            lg={4}
+            xl={5}
+            className={isMobile && 'row-center'}>
+            {subjectCode === '' &&
+              subjectList.map((subject, index) => {
+                const { code, name } = subject;
+                return (
+                  <ExamCard
+                    key={index}
+                    code={name}
+                    title={code}
+                    forSubject={true}
+                    setSubjectCode={setSubjectCode}
+                  />
+                );
+              })}
+            {subjectCode !== '' &&
+              questionList.map((question, index) => {
+                const { subjectCode, name, added } = question;
+                return (
+                  <ExamCard
+                    key={index}
+                    code={name}
+                    title={subjectCode}
+                    added={added}
+                  />
+                );
+              })}
+          </Row>
+        </Container>
+      )}
+    </main>
   );
 };
 
-export default QuestionBank;
+const mapStateToProps = (store, props) => ({
+  userData: store.appData.user
+});
+
+export default connect(mapStateToProps, null)(QuestionBank);
