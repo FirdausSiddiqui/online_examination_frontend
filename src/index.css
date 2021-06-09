@@ -1,9 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
 * {
   box-sizing: border-box;
 }
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  font-family: -apple-system, BlinkMacSystemFont, 'Poppins', Roboto,
     'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
@@ -17,6 +18,17 @@ code {
 
 button {
   cursor: pointer;
+}
+
+.link {
+  text-decoration: none !important;
+}
+.page {
+  padding: 2% 3%;
+}
+.row-center {
+  flex-flow: row wrap;
+  justify-content: center;
 }
 .rc {
   display: flex;
@@ -61,6 +73,10 @@ button {
 
   --shadow-m: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
   --shadow-l: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+
+  --gray-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.12),
+    0 2px 2px rgba(0, 0, 0, 0.12), 0 4px 4px rgba(0, 0, 0, 0.12),
+    0 8px 8px rgba(0, 0, 0, 0.12), 0 16px 16px rgba(0, 0, 0, 0.12);
 
   /*=========== Font sizes ==========*/
   --heading-l: 45px;

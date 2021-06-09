@@ -11,6 +11,10 @@ export const debounce = (callback, timeout = 500) => {
   };
 };
 
+export const sortByDate = (data) => {
+  return data.sort((a, b) => (a.added > b.added ? -1 : 1));
+};
+
 export const getDate = (date) => {
   const day = date?.getDate();
   return day < 10 ? `0${day}` : day;
@@ -67,5 +71,18 @@ export const getDay = (date) => {
       return 'Saturday';
     default:
       return 'Invalid day';
+  }
+};
+
+export const addSuffix = (number) => {
+  switch (number) {
+    case 1:
+      return `${number}st`;
+    case 2:
+      return `${number}nd`;
+    case 3:
+      return `${number}rd`;
+    default:
+      return `${number}th`;
   }
 };

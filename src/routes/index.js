@@ -1,11 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import AuthorizedRoutes from './AuthorizedRoutes';
 import UnauthorizedRoutes from './UnAuthorizedRoutes';
 import AuthorizedNavbar from '../components/Navbar/AuthorizedNavbar';
 import Drawer from '../components/Drawer';
 import styles from './routes.module.css';
 
-const RootRoute = () => {
+const RootRoute = ({ userData }) => {
   return (
     <>
       {/* <>
@@ -15,14 +16,18 @@ const RootRoute = () => {
       <div className={styles.container}>
         <AuthorizedNavbar />
         <div className={styles.drawerContainer}>
-          <Drawer />
+          <Drawer userType={userData.type} />
         </div>
         <div className={styles.content}>
-          <AuthorizedRoutes />
+          <AuthorizedRoutes userType={userData.type} />
         </div>
       </div>
     </>
   );
 };
 
-export default RootRoute;
+const mapStateToProps = (store, props) => ({
+  userData: store.appData.user
+});
+
+export default connect(mapStateToProps, null)(RootRoute);

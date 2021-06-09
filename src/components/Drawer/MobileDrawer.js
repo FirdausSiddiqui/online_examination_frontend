@@ -6,7 +6,12 @@ import useTransition from '../../hooks/useTransition';
 
 import styles from './drawer.module.css';
 
-const MobileDrawer = ({ toggleDrawer, isDrawerActive, isMobileView }) => {
+const MobileDrawer = ({
+  toggleDrawer,
+  isDrawerActive,
+  isMobileView,
+  userType
+}) => {
   const { isVisible } = useTransition({ active: isDrawerActive, maxWait: 400 });
   return (
     isVisible && (
@@ -20,7 +25,11 @@ const MobileDrawer = ({ toggleDrawer, isDrawerActive, isMobileView }) => {
             onClick={toggleDrawer}
             className={styles.overlay}
           />
-          <Drawer isMobileView={isMobileView} isDrawerActive={isDrawerActive} />
+          <Drawer
+            isMobileView={isMobileView}
+            isDrawerActive={isDrawerActive}
+            userType={userType}
+          />
         </div>
       </InsertInDom>
     )

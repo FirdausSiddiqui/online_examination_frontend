@@ -1,0 +1,152 @@
+.rulesAndRegulations,
+.guidelines,
+.subjDetails,
+.studentDetails,
+.questionSection {
+  width: 95%;
+  background-color: white;
+  margin: 1.5rem auto auto auto;
+  padding: 30px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 10px;
+}
+
+.questionSection {
+  display: flex;
+  justify-content: space-between;
+}
+
+.studentDetails {
+  display: flex;
+}
+
+.guidelines {
+  margin-bottom: 8%;
+}
+
+.rulesAndRegulations > h1 {
+  font-size: 2rem;
+}
+
+.rulesAndRegulations > h3,
+.guidelines > h3 {
+  text-decoration-line: underline;
+  margin: 5px auto;
+  padding: 10px;
+}
+
+.subheading {
+  text-decoration-line: underline;
+  margin: 5px auto;
+  padding: 2px;
+  font-weight: bold;
+}
+
+.proceed {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 55px;
+  color: rgb(30, 30, 255);
+  font-weight: 300;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.proceed > p {
+  margin-right: 5px;
+  margin-bottom: 2px;
+  text-decoration-line: underline;
+  font-weight: 500;
+}
+
+.details > p {
+  font-weight: 500;
+  font-size: 1.2rem;
+  margin: 2px;
+}
+
+.timer {
+  margin-left: auto;
+}
+
+.hrsminsec {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.legend {
+  width: 200px;
+  background-color: bisque;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.legend > span {
+  background-color: white;
+  border-radius: 50%;
+  margin: 10px;
+  padding: 5px 12px;
+  text-align: center;
+}
+
+.marksAndLegend > p {
+  text-align: end;
+}
+
+.eachQuestion > p {
+  font-size: 1.5rem;
+}
+
+.eachQuestion > div > input {
+  margin-right: 10px;
+}
+
+.eachQuestion > div {
+  margin-bottom: 10px;
+}
+
+.eachQuestion > div > label {
+  margin-bottom: 0px;
+}
+
+.eachQuestion > div {
+  display: flex;
+  align-items: center;
+}
+
+.button {
+  margin: 10px 5px 0 0;
+}
+
+.marksAndLegend > div > span {
+  cursor: pointer;
+}
+
+.selected {
+  background-color: rgb(238 170 130) !important;
+}
+
+@media (max-width: 576px) {
+  .rulesAndRegulations,
+  .guidelines,
+  .subjDetails,
+  .studentDetails,
+  .questionSection {
+    padding: 15px;
+  }
+  .questionSection {
+    flex-direction: column;
+  }
+  .studentDetails {
+    flex-direction: column;
+  }
+  .timer {
+    margin-left: unset;
+  }
+  .marksAndLegend > div {
+    display: none;
+  }
+}

@@ -6,7 +6,7 @@ import useDrawer from '../../hooks/useDrawer';
 
 import { debounce } from '../../helper';
 
-const DrawerContainer = () => {
+const DrawerContainer = ({ userType }) => {
   const debounceFuncRef = useRef(null);
   const { dimensions } = useWindowDimensions();
   const { isDrawerActive, toggleDrawer, openDrawer } = useDrawer();
@@ -24,17 +24,23 @@ const DrawerContainer = () => {
       debounceFuncRef.current();
     }
   }, [dimensions.width]);
-
   if (isMobile) {
     return (
       <MobileDrawer
         isDrawerActive={isDrawerActive}
         toggleDrawer={toggleDrawer}
         isMobileView={isMobile}
+        userType={userType}
       />
     );
   } else {
-    return <Drawer isMobileView={isMobile} isDrawerActive={isDrawerActive} />;
+    return (
+      <Drawer
+        isMobileView={isMobile}
+        isDrawerActive={isDrawerActive}
+        userType={userType}
+      />
+    );
   }
 };
 
