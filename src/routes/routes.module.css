@@ -15,4 +15,5 @@
   background-color: var(--medium-purple-color);
   display: flex;
   flex-direction: column;
+  overflow: scroll;
 }
