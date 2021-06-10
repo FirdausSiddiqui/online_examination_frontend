@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-const storeCurrentExam = (store, props) => store.currentExam.examDetails;
+const storeCurrentExam = (store, props) => store.currentExam.examDetails[0];
 const storeCurrentExamQuestions = (store, props) =>
   store.questionBank.allQuestions[1];
 

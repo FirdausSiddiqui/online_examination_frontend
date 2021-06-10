@@ -21,24 +21,24 @@ const Guidelines = ({ subjCode, sem = 1, updateIndex }) => {
           Guidelines and instructions for the Candidates for Online Examination
         </h3>
         <ul>
-          {EXAM_RULES_REGULATIONS.map((rule) => (
-            <li>{rule}</li>
+          {EXAM_RULES_REGULATIONS.map((rule, index) => (
+            <li key = {index}>{rule}</li>
           ))}
         </ul>
       </SectionContent>
       <SectionContent className={styles.guidelines}>
         <h3>Basic Instructions for Online Examinations:</h3>
         <ol type="A">
-          {BASIC_INSTRUCTIONS.map((item) => {
+          {BASIC_INSTRUCTIONS.map((item, index) => {
             return (
-              <>
+              <article key = {index}>
                 <li className={styles.subheading}>{item.heading}</li>
                 <ol type="1">
-                  {item.instructions.map((instr) => (
-                    <li>{instr}</li>
+                  {item.instructions.map((instr, index) => (
+                    <li key={index} >{instr}</li>
                   ))}
                 </ol>
-              </>
+              </article>
             );
           })}
         </ol>

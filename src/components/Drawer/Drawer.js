@@ -42,6 +42,13 @@ const Drawer = ({ isDrawerActive, isMobileView, userType }) => {
           iconName="fas fa-pen-alt"
         />
       )}
+      {userType == 'student' && (
+        <DrawerTab
+          tabName="Performance"
+          link="/auth/performance"
+          iconName="fas fa-chart-line"
+        />
+      )}
     </div>
   );
 };
