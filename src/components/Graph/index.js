@@ -94,15 +94,22 @@ const Graph = () => {
         />
         <YAxis tickLine={false} />
         <Tooltip content={<CustomTooltip />} />
-        <Area
+        {/* <Area
           type="monotone"
           dataKey="avg"
           stroke="#82ca9d"
           strokeWidth={2}
           fillOpacity={1}
           fill="url(#avg)"
+        /> */}
+        <Area
+          type="monotone"
+          dataKey="percentage"
+          stroke="#8884d8"
+          strokeWidth={2}
+          fillOpacity={1}
+          fill="url(#student)"
         />
-        {/* <Area type="monotone" dataKey="percentage" stroke="#8884d8" strokeWidth={2} fillOpacity={1} fill="url(#student)" /> */}
       </AreaChart>
     </ResponsiveContainer>
   );

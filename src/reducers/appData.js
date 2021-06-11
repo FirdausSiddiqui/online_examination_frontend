@@ -10,9 +10,9 @@ export const initialStore = {
   routeChange: false,
   user: {
     name: 'Rohit Mondal',
-    sem: 8,
-    type: 'teacher',
-    dept: 'Basic Science'
+    sem: 1,
+    type: 'student',
+    dept: 'CSE'
   }
 };
 

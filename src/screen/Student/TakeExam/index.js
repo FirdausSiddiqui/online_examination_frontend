@@ -16,23 +16,24 @@ import { GET_CURRENT_EXAM, ROUTE_CHANGE } from '../../../actions';
 
 const TakeExam = ({ currentExam, userData }) => {
   const dispatch = useDispatch();
+  const { sem, dept } = userData;
   const [index, setIndex] = useState(1);
   const updateIndex = (newIndex) => setIndex(newIndex);
   let today = new Date();
-  today.setHours(today.getHours() + currentExam.time);
+  today.setHours(today.getHours() + currentExam?.time);
   const DEADLINE = new Date(today);
 
   useEffect(() => {
     const getCurrentQuestionPaper = async () => {
       await axios
-        .get(`/currentexam?sem=1&dept=CSE`)
+        .get(`/currentexam?sem=${sem}&dept=${dept}`)
         .then((res) => {
           //   setQuestionPaperList(sortByDate(res.data));
           dispatch({
             type: GET_CURRENT_EXAM,
             payload: res.data
           });
-          console.log(res, 'abcd');
+          console.log(res.data);
         })
         .catch((err) => console.log(err));
     };
@@ -66,7 +67,7 @@ const TakeExam = ({ currentExam, userData }) => {
       }
     });
   };
-  const { subjectCode = '' } = currentExam;
+  const { subjectCode = '' } = currentExam || '';
   return (
     <Section>
       {index == 1 ? (
@@ -84,7 +85,7 @@ const TakeExam = ({ currentExam, userData }) => {
               <p>{userData.name}</p>
               <p>
                 {addSuffix(userData.sem)}&nbsp;sem,{' '}
-                {addSuffix(userData.sem / 2)}&nbsp;year
+                {addSuffix(Math.ceil(userData.sem / 2))}&nbsp;year
               </p>
               <p>Subject Code:&nbsp;{subjectCode}</p>
             </div>

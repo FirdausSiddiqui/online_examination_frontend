@@ -5,6 +5,7 @@ import cardImg from '../../assets/images/cpu.svg';
 import cardImg2 from '../../assets/images/cpu-2.svg';
 import addImg from '../../assets/images/add.svg';
 import { useMemo } from 'react';
+import { useHistory } from 'react-router-dom';
 
 const ExamCard = ({
   code,
@@ -16,9 +17,13 @@ const ExamCard = ({
 }) => {
   const images = [cardImg, cardImg2];
   const { dimensions } = useWindowDimensions();
+  const history = useHistory();
   const isMobile = useMemo(() => {
     return dimensions.width <= 800;
   }, [dimensions.width]);
+  const navigateToResult = () => {
+    history.push('/auth/examresult');
+  };
   return (
     <Card
       bg="light"
@@ -48,7 +53,7 @@ const ExamCard = ({
           size="sm"
           variant="info"
           className="mt-3"
-          onClick={forSubject && (() => setSubjectCode(title))}>
+          onClick={forSubject ? () => setSubjectCode(title) : navigateToResult}>
           {forSubject ? 'Questions' : 'Details'}
         </Button>
       )}
