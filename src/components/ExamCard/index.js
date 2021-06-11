@@ -23,7 +23,7 @@ const ExamCard = ({
   }, [dimensions.width]);
   const navigateToResult = () => {
     history.push('/auth/examresult');
-  }
+  };
   return (
     <Card
       bg="light"
@@ -53,7 +53,7 @@ const ExamCard = ({
           size="sm"
           variant="info"
           className="mt-3"
-          onClick={forSubject?(() => setSubjectCode(title)):navigateToResult}>
+          onClick={forSubject ? () => setSubjectCode(title) : navigateToResult}>
           {forSubject ? 'Questions' : 'Details'}
         </Button>
       )}

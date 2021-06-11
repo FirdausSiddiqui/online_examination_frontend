@@ -22,7 +22,7 @@ const Guidelines = ({ subjCode, sem = 1, updateIndex }) => {
         </h3>
         <ul>
           {EXAM_RULES_REGULATIONS.map((rule, index) => (
-            <li key = {index}>{rule}</li>
+            <li key={index}>{rule}</li>
           ))}
         </ul>
       </SectionContent>
@@ -31,11 +31,11 @@ const Guidelines = ({ subjCode, sem = 1, updateIndex }) => {
         <ol type="A">
           {BASIC_INSTRUCTIONS.map((item, index) => {
             return (
-              <article key = {index}>
+              <article key={index}>
                 <li className={styles.subheading}>{item.heading}</li>
                 <ol type="1">
                   {item.instructions.map((instr, index) => (
-                    <li key={index} >{instr}</li>
+                    <li key={index}>{instr}</li>
                   ))}
                 </ol>
               </article>

@@ -16,7 +16,7 @@ import { GET_CURRENT_EXAM, ROUTE_CHANGE } from '../../../actions';
 
 const TakeExam = ({ currentExam, userData }) => {
   const dispatch = useDispatch();
-  const {sem, dept} = userData;
+  const { sem, dept } = userData;
   const [index, setIndex] = useState(1);
   const updateIndex = (newIndex) => setIndex(newIndex);
   let today = new Date();
