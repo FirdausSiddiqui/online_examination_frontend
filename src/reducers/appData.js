@@ -12,7 +12,8 @@ export const initialStore = {
     name: 'Rohit Mondal',
     sem: 1,
     type: 'student',
-    dept: 'CSE'
+    dept: 'CSE',
+    roll: 1
   }
 };
 

@@ -6,49 +6,48 @@ import { currentExamQuestions } from '../../../../selectors/currentExam';
 import { currentUser } from '../../../../selectors/appData';
 import { Button } from 'react-bootstrap';
 import axios from '../../../../axios';
-import { GET_CURRENT_EXAM } from '../../../../actions';
 import LoaderContainer from '../../../../components/Loader';
+import { UPDATE_CURRENT_EXAM_MARKS } from '../../../../actions';
 
 let markedAnswers = [];
-const QuestionSection = ({ currentExam }) => {
-  const dispatch = useDispatch();
+const QuestionSection = ({ userData, currentExam }) => {
   const { questions, _id } = currentExam;
-  const [firstLoad, setFirstLoad] = useState(true);
   const [submitting, setSubmitting] = useState(false);
-  const [answerIndex, setAnswerIndex] = useState(null);
   const [qIndex, setQIndex] = useState(0);
-  const [marks, setMarks] = useState(0);
-  const [totalMarks, setTotalMarks] = useState(0);
+  const dispatch = useDispatch();
 
   const updateIndex = (step) => {
-    if (qIndex === markedAnswers.length) {
-      setAnswerIndex(null);
-      markedAnswers.push({
-        index: qIndex,
-        answerIndex,
-        id: currentExam?.questions[qIndex]._id
-      });
-    } else if (qIndex < markedAnswers.length && step !== -1) {
-      setAnswerIndex(markedAnswers[qIndex]?.answerIndex);
-      let currQuestion = markedAnswers[qIndex];
-      let updatedQuestion = { ...currQuestion, answerIndex };
-      markedAnswers[qIndex] = updatedQuestion;
-    }
     setQIndex(qIndex + step);
   };
+
   const onRadioChange = (e) => {
-    setAnswerIndex(e.target.value);
+    if (markedAnswers[qIndex]?.id != currentExam?.questions[qIndex]._id) {
+      markedAnswers.push({
+        index: qIndex,
+        answerIndex: e.target.value,
+        id: currentExam?.questions[qIndex]._id
+      });
+    } else {
+      let currQuestion = markedAnswers[qIndex];
+      let updatedQuestion = { ...currQuestion, answerIndex: e.target.value };
+      markedAnswers[qIndex] = updatedQuestion;
+    }
   };
 
   const updateMarks = async (mark) => {
+    console.log(mark, _id);
     await axios
-      .put(`/currentexam?id=${_id}`, {
+      .put(`/currentexam/${_id}`, {
         roll: 1,
         name: 'Rohit Mondal',
         mark
       })
       .then((res) => {
         console.log(res.data);
+        dispatch({
+          type: UPDATE_CURRENT_EXAM_MARKS,
+          payload: { name: userData.name, roll: userData.roll, mark }
+        });
         setSubmitting(false);
       })
       .catch((err) => {
@@ -60,49 +59,34 @@ const QuestionSection = ({ currentExam }) => {
   const calculateMarksAndSubmit = () => {
     let i = 0;
     let percentage = 0;
+    let marks = 0;
+    let totalMarks = 0;
     for (i = 0; i < markedAnswers.length; i++) {
       let questionIndex = questions.findIndex(
         (question) => question._id == markedAnswers[i].id
       );
+      totalMarks = totalMarks + questions[questionIndex]?.marks;
+
       if (
         questions[questionIndex].correctIndex == markedAnswers[i].answerIndex
       ) {
         console.log(`Answer ${i + 1} correct`);
-        setMarks(marks + 1);
-        setTotalMarks(totalMarks + questions[questionIndex]?.marks);
+        marks = marks + 1;
       } else {
         console.log(`Answer ${i + 1} wrong`);
       }
       if (i === markedAnswers.length - 1)
         percentage = (marks / totalMarks) * 100;
+      console.log(marks, totalMarks, percentage);
     }
     if (i === markedAnswers.length) updateMarks(percentage);
   };
 
   const submitAnswers = () => {
     setSubmitting(true);
-    updateIndex(0);
+    // updateIndex(0);
     calculateMarksAndSubmit();
   };
-
-  const checkMarkedOption = (optIndex) => {
-    let markedIndex;
-    console.log('yoboy');
-    markedAnswers.map((item) => {
-      console.log('yoboy2', markedIndex, optIndex);
-
-      if (questions[qIndex]._id == item.id) {
-        console.log(markedIndex, item.index, optIndex, 'hahahpopa');
-        markedIndex = item.index;
-      }
-    });
-    return optIndex == markedIndex;
-  };
-  useEffect(() => {
-    if (qIndex == questions.length) {
-      setFirstLoad(false);
-    }
-  }, [qIndex]);
   let filledArray = new Array(questions.length).fill(0);
   return (
     <>
@@ -117,11 +101,12 @@ const QuestionSection = ({ currentExam }) => {
               return (
                 <div key={optIndex}>
                   <input
+                    key={qIndex}
                     type="radio"
                     id={optIndex}
                     name="options"
                     checked={
-                      firstLoad ? null : (optIndex) => checkMarkedOption()
+                      markedAnswers[qIndex]?.answerIndex == optIndex + 1 || null
                     }
                     value={optIndex + 1}
                     onChange={onRadioChange}
