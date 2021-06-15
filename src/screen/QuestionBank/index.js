@@ -3,12 +3,15 @@ import { Container, Row } from 'react-bootstrap';
 import ExamCard from '../../components/ExamCard';
 import axios from '../../axios';
 import LoaderContainer from '../../components/Loader';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
+import { SET_CURRENT_QUESTION } from '../../actions';
 
 const QuestionBank = ({ userData }) => {
   const { type, dept, sem } = userData;
+  const dispatch = useDispatch();
   const [subjectList, setSubjectList] = useState([]);
+  const [subjectName, setSubjectName] = useState([]);
   const [questionList, setQuestionList] = useState([]);
   const [subjectCode, setSubjectCode] = useState('');
   const [loading, setLoading] = useState(false);
@@ -17,6 +20,12 @@ const QuestionBank = ({ userData }) => {
     return dimensions.width <= 800;
   }, [dimensions.width]);
 
+  const setCurrentQuestion = (index) => {
+    dispatch({
+      type: SET_CURRENT_QUESTION,
+      payload: { ...questionList[index], subjectName }
+    });
+  };
   const teacherParams = {
     type,
     tdept: dept
@@ -43,6 +52,7 @@ const QuestionBank = ({ userData }) => {
         .get(`/questionBank/${subjectCode}`)
         .then((res) => {
           setQuestionList(res.data);
+          console.log(res.data);
           setLoading(false);
         })
         .catch((err) => console.log(err.message));
@@ -77,6 +87,8 @@ const QuestionBank = ({ userData }) => {
                     title={code}
                     forSubject={true}
                     setSubjectCode={setSubjectCode}
+                    setSubjectName={setSubjectName}
+                    index={index}
                   />
                 );
               })}
@@ -89,6 +101,8 @@ const QuestionBank = ({ userData }) => {
                     code={name}
                     title={subjectCode}
                     added={added}
+                    index={index}
+                    setCurrentQuestion={setCurrentQuestion}
                   />
                 );
               })}

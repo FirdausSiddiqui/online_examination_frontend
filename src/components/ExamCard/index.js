@@ -13,7 +13,10 @@ const ExamCard = ({
   forNewExam,
   added,
   forSubject,
-  setSubjectCode
+  setSubjectCode,
+  index,
+  setSubjectName,
+  setCurrentQuestion
 }) => {
   const images = [cardImg, cardImg2];
   const { dimensions } = useWindowDimensions();
@@ -21,7 +24,12 @@ const ExamCard = ({
   const isMobile = useMemo(() => {
     return dimensions.width <= 800;
   }, [dimensions.width]);
+  const setSubject = () => {
+    setSubjectName(code);
+    setSubjectCode(title);
+  };
   const navigateToResult = () => {
+    setCurrentQuestion(index);
     history.push('/auth/examresult');
   };
   return (
@@ -53,7 +61,7 @@ const ExamCard = ({
           size="sm"
           variant="info"
           className="mt-3"
-          onClick={forSubject ? () => setSubjectCode(title) : navigateToResult}>
+          onClick={forSubject ? setSubject : navigateToResult}>
           {forSubject ? 'Questions' : 'Details'}
         </Button>
       )}
