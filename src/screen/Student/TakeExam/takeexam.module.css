@@ -129,6 +129,19 @@
   background-color: rgb(238 170 130) !important;
 }
 
+.successIcon,
+.wrongIcon {
+  margin: 5px 5px;
+}
+
+.successIcon {
+  color: var(--success-color);
+}
+
+.wrongIcon {
+  color: var(--error-color);
+}
+
 @media (max-width: 576px) {
   .rulesAndRegulations,
   .guidelines,
