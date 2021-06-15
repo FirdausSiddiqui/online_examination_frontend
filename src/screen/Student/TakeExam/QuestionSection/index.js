@@ -36,7 +36,6 @@ const QuestionSection = ({ userData, currentExam }) => {
   };
 
   const updateMarks = async (mark) => {
-    console.log(mark, _id);
     await axios
       .put(`/currentexam/${_id}`, {
         roll: userData.roll,
@@ -44,7 +43,6 @@ const QuestionSection = ({ userData, currentExam }) => {
         mark
       })
       .then((res) => {
-        console.log(res.data);
         dispatch({
           type: UPDATE_CURRENT_EXAM_MARKS,
           payload: { name: userData.name, roll: userData.roll, mark }
