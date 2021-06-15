@@ -36,6 +36,7 @@ const QuestionSection = ({ userData, currentExam }) => {
   };
 
   const updateMarks = async (mark) => {
+    console.log(mark, _id);
     await axios
       .put(`/currentexam/${_id}`, {
         roll: userData.roll,
@@ -77,6 +78,7 @@ const QuestionSection = ({ userData, currentExam }) => {
       }
       if (i === markedAnswers.length - 1)
         percentage = (marks / totalMarks) * 100;
+      console.log(marks, totalMarks, percentage);
     }
     if (i === markedAnswers.length) updateMarks(percentage);
   };
