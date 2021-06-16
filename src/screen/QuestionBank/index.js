@@ -1,11 +1,13 @@
+import styles from './questionBank.module.css';
 import { useEffect, useMemo, useState } from 'react';
-import { Container, Row } from 'react-bootstrap';
+import { Button, Container, Row } from 'react-bootstrap';
 import ExamCard from '../../components/ExamCard';
 import axios from '../../axios';
 import LoaderContainer from '../../components/Loader';
 import { connect, useDispatch } from 'react-redux';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 import { SET_CURRENT_QUESTION } from '../../actions';
+import { sortByDate } from '../../helper';
 
 const QuestionBank = ({ userData }) => {
   const { type, dept, sem } = userData;
@@ -51,8 +53,7 @@ const QuestionBank = ({ userData }) => {
       await axios
         .get(`/questionBank/${subjectCode}`)
         .then((res) => {
-          setQuestionList(res.data);
-          console.log(res.data);
+          setQuestionList(sortByDate(res.data));
           setLoading(false);
         })
         .catch((err) => console.log(err.message));
@@ -70,15 +71,15 @@ const QuestionBank = ({ userData }) => {
         <LoaderContainer specialColor="#25A2B8" />
       ) : (
         <Container>
-          <Row
-            xs={1}
-            sm={2}
-            md={3}
-            lg={4}
-            xl={5}
-            className={isMobile && 'row-center'}>
-            {subjectCode === '' &&
-              subjectList.map((subject, index) => {
+          {subjectCode === '' && (
+            <Row
+              xs={1}
+              sm={2}
+              md={3}
+              lg={4}
+              xl={5}
+              className={isMobile && 'row-center'}>
+              {subjectList.map((subject, index) => {
                 const { code, name } = subject;
                 return (
                   <ExamCard
@@ -92,8 +93,17 @@ const QuestionBank = ({ userData }) => {
                   />
                 );
               })}
-            {subjectCode !== '' &&
-              questionList.map((question, index) => {
+            </Row>
+          )}
+          {subjectCode !== '' && questionList.length > 0 && (
+            <Row
+              xs={1}
+              sm={2}
+              md={3}
+              lg={4}
+              xl={5}
+              className={isMobile && 'row-center'}>
+              {questionList.map((question, index) => {
                 const { subjectCode, name, added } = question;
                 return (
                   <ExamCard
@@ -106,7 +116,19 @@ const QuestionBank = ({ userData }) => {
                   />
                 );
               })}
-          </Row>
+            </Row>
+          )}
+          {subjectCode !== '' && questionList.length === 0 && (
+            <section className={styles.questionsNotFound}>
+              <h2>Sorry, No Questions Found for this subject!</h2>
+              <Button
+                variant="primary"
+                className="mt-5 mb-5"
+                onClick={() => setSubjectCode('')}>
+                Back to Subjects
+              </Button>
+            </section>
+          )}
         </Container>
       )}
     </main>

@@ -38,7 +38,7 @@ const AddQuestion = ({ question, questionIndex }) => {
   const handleCorrectOption = (index) => {
     setQuestionItem({
       ...questionItem,
-      correctIndex: index
+      correctIndex: index + 1
     });
   };
 

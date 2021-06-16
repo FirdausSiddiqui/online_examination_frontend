@@ -13,7 +13,6 @@ const UploadQuestion = () => {
   const [subCode, setSubCode] = useState('');
   const [teacherCode, setTeacherCode] = useState('');
   const [semester, setSemester] = useState('');
-  const currDate = new Date().toLocaleDateString();
   const initialQuestionState = {
     title: '',
     options: ['', '', '', ''],
@@ -57,8 +56,7 @@ const UploadQuestion = () => {
       .post('/questionBank', {
         subjectCode: subCode,
         name: paperName,
-        added: currDate,
-        question: questionList,
+        questions: questionList,
         teacherCode
       })
       .then((response) => {
