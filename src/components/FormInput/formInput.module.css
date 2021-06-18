@@ -1,0 +1,27 @@
+.inputContainer {
+  position: relative;
+}
+.inputLabel {
+  position: absolute;
+  background-color: #f0f3f6;
+  color: #000;
+  text-transform: capitalize;
+  top: -10px;
+  left: -10px;
+  padding: 0.5% 0.8%;
+}
+.inputField {
+  padding: 5% 8%;
+  background-color: #f0f3f6;
+  border-radius: 4px;
+  font-size: var(--fs-base);
+}
+.inputField:focus {
+  box-shadow: var(--shadow-m);
+}
+
+@media only screen and (max-width: 425px) {
+  .inputField {
+    padding: 3%;
+  }
+}
