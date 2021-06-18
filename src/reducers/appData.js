@@ -13,7 +13,7 @@ export const initialStore = {
     sem: 1,
     type: 'student',
     dept: 'CSE',
-    roll: 1
+    roll: 5
   }
 };
 

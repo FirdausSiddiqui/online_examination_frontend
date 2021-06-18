@@ -44,7 +44,21 @@ const TakeExam = ({ currentExam, userData }) => {
       detectRouteAndTabChange();
       //api to fetch current exam
     }
+    return () => {
+      document.removeEventListener('visibilitychange', routeChangeAlert);
+    };
   }, [index]);
+
+  const routeChangeAlert = () => {
+    if (document.visibilityState == 'hidden') {
+      dispatch({
+        type: ROUTE_CHANGE
+      });
+      alert(
+        'You changed tabs. This is the final warning. Changing tabs again will lead to cancellation of exam'
+      );
+    }
+  };
 
   const detectRouteAndTabChange = () => {
     window.onbeforeunload = (event) => {
@@ -56,16 +70,7 @@ const TakeExam = ({ currentExam, userData }) => {
       }
       return ''; // Legacy method for cross browser support
     };
-    document.addEventListener('visibilitychange', function () {
-      if (document.visibilityState == 'hidden') {
-        dispatch({
-          type: ROUTE_CHANGE
-        });
-        alert(
-          'You changed tabs. This is the final warning. Changing tabs again will lead to cancellation of exam'
-        );
-      }
-    });
+    document.addEventListener('visibilitychange', routeChangeAlert);
   };
   const { subjectCode = '' } = currentExam || '';
   return (

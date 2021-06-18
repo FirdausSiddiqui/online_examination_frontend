@@ -82,8 +82,8 @@ const StudentDashboard = ({ userData }) => {
       <div className={styles.updateContainer}>
         <h1>Notice</h1>
         <div className={styles.noticeDetails}>
-          {notice.map((item) => {
-            return <p>{item.title}</p>;
+          {notice.map((item, index) => {
+            return <p key={index}>{item.title}</p>;
           })}
         </div>
       </div>
