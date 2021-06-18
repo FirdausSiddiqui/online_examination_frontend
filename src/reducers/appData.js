@@ -11,7 +11,7 @@ export const initialStore = {
   user: {
     name: 'Rohit Mondal',
     sem: 1,
-    type: 'student',
+    type: 'admin',
     dept: 'CSE',
     roll: 5
   }

@@ -30,6 +30,11 @@ button {
   flex-flow: row wrap;
   justify-content: center;
 }
+.align-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center !important;
+}
 .rc {
   display: flex;
   justify-content: center;

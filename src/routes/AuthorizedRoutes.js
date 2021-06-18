@@ -7,6 +7,7 @@ import ExamResult from '../screen/Result/ExamResult';
 import QuestionBank from '../screen/QuestionBank';
 import TakeExam from '../screen/Student/TakeExam';
 import UploadQuestion from '../screen/UploadQuestion';
+import NewEntry from '../screen/NewEntry';
 
 const AuthorizedRoutes = ({ userType }) => {
   return (
@@ -17,6 +18,9 @@ const AuthorizedRoutes = ({ userType }) => {
         <Route exact path="/auth/dashboard" component={Dashboard} />
         <Route exact path="/auth/performance" component={Performance} />
         <Route exact path="/auth/examresult" component={ExamResult} />
+        {userType === 'admin' && (
+          <Route exact path="/auth/newEntry" component={NewEntry} />
+        )}
         {userType === 'teacher' && (
           <Route exact path="/auth/uploadQuestion" component={UploadQuestion} />
         )}
