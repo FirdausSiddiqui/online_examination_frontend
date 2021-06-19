@@ -53,7 +53,7 @@ const NewEntry = () => {
       )}
       {entryType !== '' && (
         <SectionContent className="page">
-          <NewEntryForm />
+          <NewEntryForm type={entryType} />
         </SectionContent>
       )}
     </>

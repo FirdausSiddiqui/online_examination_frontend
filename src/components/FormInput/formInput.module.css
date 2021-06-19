@@ -1,5 +1,6 @@
 .inputContainer {
   position: relative;
+  display: flex;
 }
 .inputLabel {
   position: absolute;
@@ -12,6 +13,7 @@
 }
 .inputField {
   padding: 5% 8%;
+  width: 25vw;
   background-color: #f0f3f6;
   border-radius: 4px;
   font-size: var(--fs-base);
@@ -19,9 +21,24 @@
 .inputField:focus {
   box-shadow: var(--shadow-m);
 }
-
-@media only screen and (max-width: 425px) {
+.required {
+  font-size: xx-small;
+  color: red;
+  padding-left: 1.5%;
+  right: 0;
+  top: 0;
+}
+.inValid {
+  border-color: red;
+}
+@media only screen and (max-width: 992px) {
   .inputField {
-    padding: 3%;
+    padding: 4.5%;
+    width: 35vw;
+  }
+}
+@media only screen and (max-width: 576px) {
+  .inputField {
+    width: 80vw;
   }
 }
