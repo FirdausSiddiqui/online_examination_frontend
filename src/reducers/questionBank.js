@@ -1,7 +1,8 @@
-import { GET_QUESTION_BANK } from '../actions';
+import { GET_QUESTION_BANK, SET_CURRENT_QUESTION } from '../actions';
 
 export const initialStore = {
-  allQuestions: []
+  allQuestions: [],
+  currentQuestion: {}
 };
 
 const questionBank = (store = initialStore, action) => {
@@ -12,6 +13,12 @@ const questionBank = (store = initialStore, action) => {
       return {
         ...store,
         allQuestions: payload
+      };
+    }
+    case SET_CURRENT_QUESTION: {
+      return {
+        ...store,
+        currentQuestion: payload
       };
     }
     default:

@@ -13,6 +13,7 @@ import { UPDATE_CURRENT_EXAM_MARKS } from '../../../../actions';
 let markedAnswers = [];
 const QuestionSection = ({ userData, currentExam }) => {
   const { questions, _id } = currentExam;
+  const { name, sem, roll } = userData;
   const [submitting, setSubmitting] = useState(false);
   const [qIndex, setQIndex] = useState(0);
   const dispatch = useDispatch();
@@ -39,8 +40,8 @@ const QuestionSection = ({ userData, currentExam }) => {
     console.log(mark, _id);
     await axios
       .put(`/currentexam/${_id}`, {
-        roll: userData.roll,
-        name: userData.name,
+        roll,
+        name,
         mark
       })
       .then((res) => {
@@ -112,9 +113,9 @@ const QuestionSection = ({ userData, currentExam }) => {
         <SectionContent className={styles.questionSection}>
           <div className={styles.eachQuestion}>
             <p>
-              Q {qIndex + 1}. {questions[qIndex].title}
+              Q {qIndex + 1}. {questions[qIndex]?.title}
             </p>
-            {questions[qIndex].options.map((opt, optIndex) => {
+            {questions[qIndex]?.options.map((opt, optIndex) => {
               return (
                 <div key={optIndex}>
                   {!currentExam.examTaken ? (
@@ -168,7 +169,7 @@ const QuestionSection = ({ userData, currentExam }) => {
             </div>
           </div>
           <div className={styles.marksAndLegend}>
-            <p>{questions[qIndex].marks} Mark(s)</p>
+            <p>{questions[qIndex]?.marks} Mark(s)</p>
             <div className={styles.legend}>
               {filledArray.map((item, index) => (
                 <span
