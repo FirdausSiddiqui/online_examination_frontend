@@ -1,0 +1,12 @@
+.additionCard {
+  cursor: pointer;
+}
+.additionCard:hover {
+  transition: 0.4s;
+  transform: translate3d(0, 10px, 6em);
+  box-shadow: var(--gray-box-shadow);
+}
+.additionCardImg {
+  height: 15vh;
+  object-fit: contain;
+}
