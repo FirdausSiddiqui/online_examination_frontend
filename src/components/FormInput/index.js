@@ -57,6 +57,7 @@ const FormInput = ({
           name={name}
           className={cx(styles.inputField, !isValid && styles.inValid)}
           onChange={multiple ? onMultipleSelect : (e) => onInputChange(e)}>
+          <option value="">Choose {name}</option>
           {options.map((option, index) => {
             return (
               <option key={index} value={option}>
