@@ -4,8 +4,6 @@ import { connect, useDispatch } from 'react-redux';
 import axios from '../../../axios';
 import { Section, SectionContent } from '../../../components/Section';
 import { currentExam } from '../../../selectors/currentExam';
-import { BASIC_INSTRUCTIONS, EXAM_RULES_REGULATIONS } from '../../../constants';
-import Icon from '../../../components/Icon';
 import { addSuffix } from '../../../helper';
 import styles from './takeexam.module.css';
 import { currentUser } from '../../../selectors/appData';
@@ -20,7 +18,8 @@ const TakeExam = ({ currentExam, userData }) => {
   const [index, setIndex] = useState(1);
   const updateIndex = (newIndex) => setIndex(newIndex);
   let today = new Date();
-  today.setHours(today.getHours() + currentExam?.time);
+  let currentExamTime = currentExam?.examTaken ? 0 : currentExam?.time;
+  today.setHours(today.getHours() + currentExamTime);
   const DEADLINE = new Date(today);
 
   useEffect(() => {
@@ -28,16 +27,14 @@ const TakeExam = ({ currentExam, userData }) => {
       await axios
         .get(`/currentexam?sem=${sem}&dept=${dept}`)
         .then((res) => {
-          //   setQuestionPaperList(sortByDate(res.data));
           dispatch({
             type: GET_CURRENT_EXAM,
             payload: res.data
           });
-          console.log(res.data);
         })
         .catch((err) => console.log(err));
     };
-    getCurrentQuestionPaper();
+    if (!currentExam.examTaken) getCurrentQuestionPaper();
   }, []);
   useEffect(() => {
     if (index == 2) {
@@ -75,16 +72,18 @@ const TakeExam = ({ currentExam, userData }) => {
   const { subjectCode = '' } = currentExam || '';
   return (
     <Section>
-      {index == 1 ? (
+      {index == 1 && !currentExam.examTaken ? (
         <Guidelines subjCode={subjectCode} updateIndex={updateIndex} />
       ) : (
         <>
-          <Prompt
-            when={index == 2}
-            message={(location) => {
-              return `You shouldn't go to ${location.pathname}. Going to any other page will result in cancellation of your exam.`;
-            }}
-          />
+          {!currentExam.examTaken && (
+            <Prompt
+              when={index == 2}
+              message={(location) => {
+                return `You shouldn't go to ${location.pathname}. Going to any other page will result in cancellation of your exam.`;
+              }}
+            />
+          )}
           <SectionContent className={styles.studentDetails}>
             <div className={styles.details}>
               <p>{userData.name}</p>

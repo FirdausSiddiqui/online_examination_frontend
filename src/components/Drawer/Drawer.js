@@ -23,11 +23,20 @@ const Drawer = ({ isDrawerActive, isMobileView, userType }) => {
         link="/auth/dashboard"
         iconName="fas fa-home"
       />
-      <DrawerTab
-        tabName="Question Bank"
-        link="/auth/questionBank"
-        iconName="fas fa-book"
-      />
+      {userType === 'admin' && (
+        <DrawerTab
+          tabName="New Entry"
+          link="/auth/newEntry"
+          iconName="fas fa-plus"
+        />
+      )}
+      {userType !== 'admin' && (
+        <DrawerTab
+          tabName="Question Bank"
+          link="/auth/questionBank"
+          iconName="fas fa-book"
+        />
+      )}
       {userType === 'teacher' && (
         <DrawerTab
           tabName="New Exam Paper"

@@ -19,7 +19,8 @@ const currentExam = (store = initialStore, action) => {
         ...store,
         examDetails: {
           ...store.examDetails,
-          marks: [...store.examDetails.marks, action.payload]
+          marks: [...store.examDetails.marks, action.payload],
+          examTaken: true
         }
       };
     }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { SectionContent } from '../../../../components/Section';
 import { connect, useDispatch } from 'react-redux';
 import styles from '../takeexam.module.css';
@@ -7,6 +7,7 @@ import { currentUser } from '../../../../selectors/appData';
 import { Button } from 'react-bootstrap';
 import axios from '../../../../axios';
 import LoaderContainer from '../../../../components/Loader';
+import Icon from '../../../../components/Icon';
 import { UPDATE_CURRENT_EXAM_MARKS } from '../../../../actions';
 
 let markedAnswers = [];
@@ -44,11 +45,11 @@ const QuestionSection = ({ userData, currentExam }) => {
         mark
       })
       .then((res) => {
-        console.log(res.data);
         dispatch({
           type: UPDATE_CURRENT_EXAM_MARKS,
           payload: { name: userData.name, roll: userData.roll, mark }
         });
+        setQIndex(0);
         setSubmitting(false);
       })
       .catch((err) => {
@@ -85,10 +86,26 @@ const QuestionSection = ({ userData, currentExam }) => {
 
   const submitAnswers = () => {
     setSubmitting(true);
-    // updateIndex(0);
     calculateMarksAndSubmit();
   };
   let filledArray = new Array(questions.length).fill(0);
+  const checkCorrectOption = (optIndex) => {
+    if (optIndex + 1 == markedAnswers[qIndex].answerIndex) {
+      if (questions[qIndex].correctIndex - 1 == optIndex) {
+        return (
+          <Icon name="fas fa-check-circle" className={styles.successIcon} />
+        );
+      } else {
+        return <Icon name="fas fa-times" className={styles.wrongIcon} />;
+      }
+    } else {
+      if (optIndex + 1 == questions[qIndex].correctIndex) {
+        return (
+          <Icon name="fas fa-check-circle" className={styles.successIcon} />
+        );
+      } else return <span>&nbsp;&nbsp;</span>;
+    }
+  };
   return (
     <>
       {submitting && <LoaderContainer text="Submitting..." />}
@@ -101,17 +118,22 @@ const QuestionSection = ({ userData, currentExam }) => {
             {questions[qIndex]?.options.map((opt, optIndex) => {
               return (
                 <div key={optIndex}>
-                  <input
-                    key={qIndex}
-                    type="radio"
-                    id={optIndex}
-                    name="options"
-                    checked={
-                      markedAnswers[qIndex]?.answerIndex == optIndex + 1 || null
-                    }
-                    value={optIndex + 1}
-                    onChange={onRadioChange}
-                  />
+                  {!currentExam.examTaken ? (
+                    <input
+                      key={qIndex}
+                      type="radio"
+                      id={optIndex}
+                      name="options"
+                      checked={
+                        markedAnswers[qIndex]?.answerIndex == optIndex + 1 ||
+                        null
+                      }
+                      value={optIndex + 1}
+                      onChange={onRadioChange}
+                    />
+                  ) : (
+                    checkCorrectOption(optIndex)
+                  )}
                   <label htmlFor={opt}>{opt}</label>
                   <br />
                 </div>
@@ -136,7 +158,7 @@ const QuestionSection = ({ userData, currentExam }) => {
                   Next
                 </Button>
               )}
-              {qIndex == questions?.length - 1 && (
+              {qIndex == questions.length - 1 && !currentExam.examTaken && (
                 <Button
                   className={styles.button}
                   variant="info"
