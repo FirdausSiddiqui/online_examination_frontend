@@ -3,12 +3,14 @@ import AppDataReducer from './appData';
 import QuestionDataReducer from './questionData';
 import CurrentExamReducer from './currentExam';
 import QuestionBankReducer from './questionBank';
+import AlertReducer from './alert';
 
 const appReducer = combineReducers({
   appData: AppDataReducer,
   questionData: QuestionDataReducer,
   currentExam: CurrentExamReducer,
-  questionBank: QuestionBankReducer
+  questionBank: QuestionBankReducer,
+  alerts: AlertReducer
 });
 
 const rootReducer = (store, action) => {

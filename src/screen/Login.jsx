@@ -6,6 +6,12 @@ const Login = () => {
   return (
     <div className="container">
       <Card
+        title="For Admin"
+        content="Create students, teachers and assign current exam"
+        link="/adminLogin"
+        type="Login"
+      />
+      <Card
         title="For Teachers"
         content="Create your Exam and check the skills of the students"
         link="/teacherLogin"

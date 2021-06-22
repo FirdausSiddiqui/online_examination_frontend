@@ -8,6 +8,7 @@ import TeacherSignup from '../screen/TeacherSignup';
 import TeacherLogin from '../screen/TeacherLogin';
 import StudentSignup from '../screen/StudentSignup';
 import StudentLogin from '../screen/StudentLogin';
+import AdminLogin from '../screen/AdminLogin';
 
 const UnauthorizedRoutes = () => {
   const Fallback = () => <p>Loading Page ...</p>;
@@ -23,6 +24,8 @@ const UnauthorizedRoutes = () => {
         <Route path="/studentSignup" component={StudentSignup} />
         <Route path="/teacherLogin" component={TeacherLogin} />
         <Route path="/studentLogin" component={StudentLogin} />
+        <Route path="/adminLogin" component={AdminLogin} />
+        <Route component={() => 'Page not found'} />
       </Switch>
     </Suspense>
   );

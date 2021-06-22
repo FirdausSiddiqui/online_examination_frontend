@@ -1,0 +1,65 @@
+.container {
+  width: 300px;
+  min-height: 60px;
+  border-radius: 4px;
+  white-space: normal;
+  height: auto;
+  padding: 15px;
+  text-align: center;
+  font-size: var(--para-m);
+  font-weight: 500;
+  position: fixed;
+  z-index: var(--alert-z);
+}
+
+.close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 16px;
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+
+.top {
+  top: 5px;
+  left: auto;
+  right: auto;
+}
+
+.bottom {
+  bottom: 5px;
+  left: auto;
+  right: auto;
+}
+
+.left {
+  top: 5px;
+  left: 10px;
+}
+
+.right {
+  top: 5px;
+  right: 10px;
+}
+
+.success {
+  background-color: var(--success-color);
+  color: white;
+}
+
+.error {
+  background-color: var(--error-color);
+  color: white;
+}
+
+.warning {
+  background-color: var(--warning-color);
+  color: black;
+}
+
+.info {
+  background-color: var(--info-color);
+  color: white;
+}

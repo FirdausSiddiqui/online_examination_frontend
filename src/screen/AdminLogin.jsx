@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
-import teacher from '../images/teacherLogin.jpg';
+import teacherworking from '../images/teacherworking.jpg';
 import Input from '../components/Input';
 import axios from '../axios';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { SET_USER_DETAILS } from '../actions';
 import useAlert from '../hooks/useAlert';
+import { SET_USER_DETAILS } from '../actions';
 import ActivityIndicator from '../components/ActivityIndicator';
 
-const TeacherLogin = () => {
+const AdminLogin = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const { showAlert } = useAlert();
@@ -19,12 +19,12 @@ const TeacherLogin = () => {
     setLoading(true);
     e.preventDefault();
     await axios
-      .post('/teacherLogin', {
-        teacherCode: e.target.teacherCode.value,
-        password: e.target.teacherPassword.value
+      .post('/adminLogin', {
+        name: e.target.adminId.value,
+        pass: e.target.adminPassword.value
       })
       .then((res) => {
-        if (res.data.message === 'user signed in successfully') {
+        if (res.data.message === 'login successfull') {
           dispatch({
             type: SET_USER_DETAILS,
             payload: res.data.user
@@ -45,24 +45,23 @@ const TeacherLogin = () => {
         });
       });
   };
+
   return (
     <div className="container-sm p-5 shadow mt-5" style={{ width: '600px' }}>
       <div className="row">
         <div className="col-sm-6 pt-5">
           <form onSubmit={onSubmit}>
             <Input
-              name="teacherCode"
+              name="adminId"
               type="text"
               class="form-control"
-              placeholder="Teacher Code"
-              required
+              placeholder="Admin Id"
             />
             <Input
-              name="teacherPassword"
+              name="adminPassword"
               type="password"
               class="form-control"
               placeholder="Password"
-              required
             />
             <button
               disabled={loading}
@@ -79,10 +78,9 @@ const TeacherLogin = () => {
         </div>
         <div className="col-sm-6 ">
           <img
-            src={teacher}
+            src={teacherworking}
             alt="teacher sitting with his laptop"
-            className=" "
-            style={{ width: '250px', height: '200px' }}
+            style={{ width: '250px', height: '220px' }}
           />
         </div>
       </div>
@@ -90,4 +88,4 @@ const TeacherLogin = () => {
   );
 };
 
-export default TeacherLogin;
+export default AdminLogin;
