@@ -24,7 +24,7 @@ const TeacherLogin = () => {
         password: e.target.teacherPassword.value
       })
       .then((res) => {
-        if (res.data.message === 'user signed in successfully') {
+        if (res.data.message === 'sign in successfully') {
           dispatch({
             type: SET_USER_DETAILS,
             payload: res.data.user
@@ -80,7 +80,7 @@ const TeacherLogin = () => {
         <div className="col-sm-6 ">
           <img
             src={teacher}
-            alt="teacher sitting with his laptop"
+            alt="teacher sitting with laptop"
             className=" "
             style={{ width: '250px', height: '200px' }}
           />

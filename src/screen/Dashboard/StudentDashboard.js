@@ -72,21 +72,23 @@ const StudentDashboard = ({ userData }) => {
   return (
     <div className={styles.homeContent}>
       <div className={styles.headerAndDate}>
-        <h1 className={styles.homeHeading}>Welcome {userData?.name}</h1>
+        <h1 className={styles.homeHeading}>Welcome, {userData?.name}</h1>
         <div className={styles.homeDateContainer}>
           <p className={styles.homeMonth}>{month}</p>
           <p className={styles.homeDay}>{day}</p>
           <p className={styles.homeDate}>{date}</p>
         </div>
       </div>
-      <div className={styles.updateContainer}>
-        <h1>Notice</h1>
-        <div className={styles.noticeDetails}>
-          {notice.map((item, index) => {
-            return <p key={index}>{item.title}</p>;
-          })}
+      {userData.type !== 'admin' && (
+        <div className={styles.updateContainer}>
+          <h1>Notice</h1>
+          <div className={styles.noticeDetails}>
+            {notice.map((item, index) => {
+              return <p key={index}>{item.title}</p>;
+            })}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

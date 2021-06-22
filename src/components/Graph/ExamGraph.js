@@ -28,6 +28,7 @@ const ExamGraph = ({ examMarks }) => {
         <XAxis
           axisLine={false}
           type="number"
+          domain={['dataMin', 'dataMax']}
           dataKey="roll"
           name="Roll"
           unit=""

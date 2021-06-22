@@ -5,14 +5,17 @@ import useQuestions from '../../hooks/useQuestions';
 import AddQuestion from '../../components/AddQuestion';
 import axios from '../../axios';
 import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { currentUser } from '../../selectors/appData';
+import useAlert from '../../hooks/useAlert';
 
-const UploadQuestion = () => {
+const UploadQuestion = ({ userData }) => {
   const history = useHistory();
+  const { showAlert } = useAlert();
+  const { teacherCode } = userData;
   const { questionList, addBlankQuestion, resetPaper } = useQuestions();
   const [paperName, setPaperName] = useState('');
   const [subCode, setSubCode] = useState('');
-  const [teacherCode, setTeacherCode] = useState('');
-  const [semester, setSemester] = useState('');
   const initialQuestionState = {
     title: '',
     options: ['', '', '', ''],
@@ -33,20 +36,6 @@ const UploadQuestion = () => {
       label: 'Subject Code',
       id: 'sub-code',
       placeholder: 'Example: CS101A'
-    },
-    {
-      value: semester,
-      setter: setSemester,
-      label: 'Semester',
-      id: 'semester',
-      placeholder: 'Example: 1'
-    },
-    {
-      value: teacherCode,
-      setter: setTeacherCode,
-      label: 'Teacher Code',
-      id: 'teacher-code',
-      placeholder: 'Example: MDu'
     }
   ];
 
@@ -60,15 +49,14 @@ const UploadQuestion = () => {
         teacherCode
       })
       .then((response) => {
-        console.log(response.data);
+        showAlert({ message: 'Question uploaded successfully' });
         resetPaper();
         history.push('/auth/questionBank');
       })
       .catch((error) => {
-        console.log(error);
+        showAlert({ type: 'error', message: 'Some Error Occured' });
       });
   };
-
   return (
     <main className="page">
       <div className={`container ${styles.questionsContainer} mt-4`}>
@@ -113,7 +101,7 @@ const UploadQuestion = () => {
             type="submit"
             variant="info"
             className={`mt-4 mb-3 ${styles.submitBtn}`}
-            disabled={subCode === '' || teacherCode === '' || semester === ''}
+            disabled={subCode === '' || teacherCode === ''}
             onClick={(e) => submitQuestionPaper(e)}>
             Submit Question Paper
           </Button>
@@ -123,4 +111,7 @@ const UploadQuestion = () => {
   );
 };
 
-export default UploadQuestion;
+const mapStateToProps = (store, props) => ({
+  userData: currentUser(store, props)
+});
+export default connect(mapStateToProps, null)(UploadQuestion);
