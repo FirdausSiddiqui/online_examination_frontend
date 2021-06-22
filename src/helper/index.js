@@ -86,3 +86,17 @@ export const addSuffix = (number) => {
       return `${number}th`;
   }
 };
+
+export const countCharactersInAString = (str, character) => {
+  const re = new RegExp(character, 'g');
+  const count = str.match(re).length;
+  return count;
+};
+
+export const generateRandomId = () => {
+  let id = '';
+  for (let i = 0; i < 6; i++) {
+    id += Math.ceil(Math.random() * 10);
+  }
+  return id;
+};

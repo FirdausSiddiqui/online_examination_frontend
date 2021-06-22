@@ -2,19 +2,15 @@ import {
   TOGGLE_DRAWER,
   OPEN_DRAWER,
   CLOSE_DRAWER,
-  ROUTE_CHANGE
+  ROUTE_CHANGE,
+  SET_USER_DETAILS,
+  RESET_USER
 } from '../actions';
 
 export const initialStore = {
   isDrawerOpen: false,
   routeChange: false,
-  user: {
-    name: 'Rohit Mondal',
-    sem: 1,
-    type: 'admin',
-    dept: 'CSE',
-    roll: 5
-  }
+  user: {}
 };
 
 const appData = (store = initialStore, action) => {
@@ -46,6 +42,20 @@ const appData = (store = initialStore, action) => {
       return {
         ...store,
         routeChange: true
+      };
+    }
+
+    case SET_USER_DETAILS: {
+      return {
+        ...store,
+        user: action.payload
+      };
+    }
+
+    case RESET_USER: {
+      return {
+        ...store,
+        user: []
       };
     }
 
