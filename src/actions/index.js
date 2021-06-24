@@ -14,3 +14,4 @@ export const SET_USER_DETAILS = 'SET_USER_DETAILS';
 export const ACTIVATE_ALERT = 'ACTIVATE_ALERT';
 export const DE_ACTIVATE_ALERT = 'DE_ACTIVATE_ALERT';
 export const RESET_USER = 'RESET_USER';
+export const EXAM_STARTED = 'EXAM_STARTED';

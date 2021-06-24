@@ -19,7 +19,7 @@ const TakeExam = ({ currentExam, userData }) => {
   const updateIndex = (newIndex) => setIndex(newIndex);
   let today = new Date();
   let currentExamTime = currentExam?.examTaken ? 0 : currentExam?.time;
-  today.setHours(today.getHours() + currentExamTime);
+  today.setSeconds(today.getSeconds() + currentExamTime);
   const DEADLINE = new Date(today);
 
   useEffect(() => {
