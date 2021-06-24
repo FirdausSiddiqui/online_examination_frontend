@@ -1,4 +1,8 @@
-import { GET_CURRENT_EXAM, UPDATE_CURRENT_EXAM_MARKS } from '../actions';
+import {
+  EXAM_STARTED,
+  GET_CURRENT_EXAM,
+  UPDATE_CURRENT_EXAM_MARKS
+} from '../actions';
 
 export const initialStore = {
   examDetails: {}
@@ -21,6 +25,15 @@ const currentExam = (store = initialStore, action) => {
           ...store.examDetails,
           marks: [...store.examDetails.marks, action.payload],
           examTaken: true
+        }
+      };
+    }
+    case EXAM_STARTED: {
+      return {
+        ...store,
+        examDetails: {
+          ...store.examDetails
+          // examTaken: true
         }
       };
     }

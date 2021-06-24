@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SectionContent } from '../../../../components/Section';
 import { connect, useDispatch } from 'react-redux';
 import styles from '../takeexam.module.css';
@@ -8,7 +8,7 @@ import { Button } from 'react-bootstrap';
 import axios from '../../../../axios';
 import LoaderContainer from '../../../../components/Loader';
 import Icon from '../../../../components/Icon';
-import { UPDATE_CURRENT_EXAM_MARKS } from '../../../../actions';
+import { EXAM_STARTED, UPDATE_CURRENT_EXAM_MARKS } from '../../../../actions';
 
 let markedAnswers = [];
 const QuestionSection = ({ userData, currentExam }) => {
@@ -18,6 +18,11 @@ const QuestionSection = ({ userData, currentExam }) => {
   const [qIndex, setQIndex] = useState(0);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch({
+      type: EXAM_STARTED
+    });
+  }, []);
   const updateIndex = (step) => {
     setQIndex(qIndex + step);
   };
