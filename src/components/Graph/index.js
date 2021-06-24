@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import {
   AreaChart,
   Area,
@@ -7,69 +9,18 @@ import {
   Tooltip,
   ResponsiveContainer
 } from 'recharts';
+import { currentUser } from '../../selectors/appData';
 import styles from './graph.module.css';
 
-const Graph = () => {
-  const date = new Date().toLocaleDateString();
-  const studentMarks = [
-    {
-      exam: '1st Internal',
-      subject: 'CS 802D',
-      percentage: 75.4,
-      avg: 70,
-      date
-    },
-    {
-      exam: '1st Internal',
-      subject: 'CS 803E',
-      percentage: 71.8,
-      avg: 77.2,
-      date
-    },
-    {
-      exam: '1st Internal',
-      subject: 'CS 801A',
-      percentage: 64,
-      avg: 69,
-      date
-    },
-    {
-      exam: '1st Internal',
-      subject: 'HU 801A',
-      percentage: 82,
-      avg: 80,
-      date
-    },
-    {
-      exam: 'Practical',
-      subject: 'CS 792D',
-      percentage: 70,
-      avg: 70.8,
-      date
-    },
-    {
-      exam: 'Practical',
-      subject: 'CS 791A',
-      percentage: 62,
-      avg: 58.75,
-      date
-    },
-    {
-      exam: '1st Internal',
-      subject: 'CS 702D',
-      percentage: 45,
-      avg: 62,
-      date
-    }
-  ];
+const Graph = ({ userData }) => {
   const getExamData = (data) => {
-    const { exam, subject, date } = data;
-    return `${subject},${exam},${date}`;
+    const { subjectCode, date } = data;
+    return `${subjectCode},${date}`;
   };
   return (
     <ResponsiveContainer width="100%" height={400}>
       <AreaChart
-        data={studentMarks}
+        data={userData?.marks}
         margin={{
           top: 30,
           right: 30,
@@ -104,7 +55,7 @@ const Graph = () => {
         /> */}
         <Area
           type="monotone"
-          dataKey="percentage"
+          dataKey="mark"
           stroke="#8884d8"
           strokeWidth={2}
           fillOpacity={1}
@@ -115,14 +66,18 @@ const Graph = () => {
   );
 };
 
-export default Graph;
+const mapStateToProps = (store, props) => ({
+  userData: currentUser(store, props)
+});
+
+export default connect(mapStateToProps, null)(Graph);
 
 const CustomAxisTick = ({ x, y, payload }) => {
-  const date = payload.value.split(',')[2];
+  const date = payload?.value.split(',')[1];
   return (
     <foreignObject x={x} y={y} className={styles.tickWrapper}>
       <div xmlns="http://www.w3.org/1999/xhtml" className={styles.tick}>
-        <p>{date}</p>
+        <p>{date.substr(0, 10)}</p>
       </div>
     </foreignObject>
   );
@@ -130,13 +85,13 @@ const CustomAxisTick = ({ x, y, payload }) => {
 
 const CustomTooltip = ({ payload, label, active }) => {
   if (active) {
-    const [subject, exam] = label.toString().split(',');
+    const [subject, date] = label.toString().split(',');
     return (
       <div className={styles.customTooltip}>
         <p className={styles.marks}>{`Marks : ${payload[0].value} %`}</p>
         {/* <p className={styles.marks}>{`Average : ${payload[1].value} %`}</p> */}
         <p>Subject: {subject}</p>
-        <p>{exam}</p>
+        <p>{date.substr(0, 10)}</p>
       </div>
     );
   }

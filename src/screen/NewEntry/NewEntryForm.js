@@ -5,8 +5,10 @@ import FormInput from '../../components/FormInput';
 import emailjs from 'emailjs-com';
 import axios from '../../axios';
 import LoaderContainer from '../../components/Loader';
+import useAlert from '../../hooks/useAlert';
 
 const NewEntryForm = ({ type }) => {
+  const { showAlert } = useAlert();
   const [name, setName] = useState('');
   const [semester, setSemester] = useState('');
   const [roll, setRoll] = useState('');
@@ -139,13 +141,13 @@ const NewEntryForm = ({ type }) => {
             },
             'user_QASgJ4J7Brk2dFXYkt6YW'
           );
-        alert(`${type} added successfully`);
+        showAlert({ message: `${type} added successfully` });
         resetInputs();
       })
       .catch((err) => {
         setSubmitting(false);
         if (err.message == 'Request failed with status code 409')
-          alert(`${type} already exists!`);
+          showAlert({ type: 'error', message: `${type} already exists!` });
         else alert(err.message);
       });
   };
