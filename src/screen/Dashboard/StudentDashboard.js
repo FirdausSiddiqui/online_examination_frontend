@@ -102,14 +102,16 @@ const StudentDashboard = ({ userData }) => {
             <p className={styles.homeDate}>{date}</p>
           </div>
         </div>
-        <div className={styles.updateContainer}>
-          <h1>Notice</h1>
-          <div className={styles.noticeDetails}>
-            {notice.map((item, index) => {
-              return <p key={index}>{item.title}</p>;
-            })}
+        {userData.type !== 'admin' && (
+          <div className={styles.updateContainer}>
+            <h1>Notice</h1>
+            <div className={styles.noticeDetails}>
+              {notice.map((item, index) => {
+                return <p key={index}>{item.title}</p>;
+              })}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </>
   );

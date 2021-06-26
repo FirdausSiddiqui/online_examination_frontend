@@ -74,10 +74,10 @@ const QuestionBank = ({ userData }) => {
           {subjectCode === '' && (
             <Row
               xs={1}
-              sm={2}
-              md={3}
-              lg={4}
-              xl={5}
+              sm={1}
+              md={2}
+              lg={3}
+              xl={4}
               className={isMobile && 'row-center'}>
               {subjectList.map((subject, index) => {
                 const { code, name } = subject;
@@ -98,10 +98,10 @@ const QuestionBank = ({ userData }) => {
           {subjectCode !== '' && questionList.length > 0 && (
             <Row
               xs={1}
-              sm={2}
-              md={3}
-              lg={4}
-              xl={5}
+              sm={1}
+              md={2}
+              lg={3}
+              xl={4}
               className={isMobile && 'row-center'}>
               {questionList.map((question, index) => {
                 const { subjectCode, name, added } = question;

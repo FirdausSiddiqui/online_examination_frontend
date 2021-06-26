@@ -77,7 +77,7 @@ const CustomAxisTick = ({ x, y, payload }) => {
   return (
     <foreignObject x={x} y={y} className={styles.tickWrapper}>
       <div xmlns="http://www.w3.org/1999/xhtml" className={styles.tick}>
-        <p>{date.substr(0, 10)}</p>
+        <p>{date?.substr(0, 10)}</p>
       </div>
     </foreignObject>
   );
@@ -88,7 +88,9 @@ const CustomTooltip = ({ payload, label, active }) => {
     const [subject, date] = label.toString().split(',');
     return (
       <div className={styles.customTooltip}>
-        <p className={styles.marks}>{`Marks : ${payload[0].value} %`}</p>
+        <p className={styles.marks}>{`Marks : ${payload[0]?.value.toPrecision(
+          4
+        )} %`}</p>
         {/* <p className={styles.marks}>{`Average : ${payload[1].value} %`}</p> */}
         <p>Subject: {subject}</p>
         <p>{date.substr(0, 10)}</p>

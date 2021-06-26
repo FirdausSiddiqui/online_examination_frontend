@@ -29,8 +29,14 @@ const ExamResult = () => {
           <span>Taken on: {added?.substr(0, 10)}</span>
         </Container>
         <Container>
-          <h4>Roll Wise Performance Graph</h4>
-          <ExamGraph examMarks={marks} />
+          <h4>
+            Roll Wise Performance Graph {''}{' '}
+            {marks.length === 0 && 'Not Available'}
+          </h4>
+          {marks.length === 0 && (
+            <h4 className="mt-4">Seems like no one has taken this test yet!</h4>
+          )}
+          {marks.length !== 0 && <ExamGraph examMarks={marks} />}
         </Container>
       </main>
     </SectionContent>

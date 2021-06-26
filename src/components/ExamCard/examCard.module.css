@@ -1,5 +1,5 @@
 .card {
-  padding: 1% !important;
+  padding: 1% 1.25% !important;
   display: flex;
   flex-direction: column;
   margin: 1%;
@@ -20,6 +20,7 @@
 .cardSubtitle {
   display: flex;
   justify-content: space-between;
+  margin-top: 1vh;
 }
 .cardDate {
   align-self: flex-end;
