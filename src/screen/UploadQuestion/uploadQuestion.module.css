@@ -17,7 +17,7 @@
   margin: 1%;
 }
 .submitBtn {
-  width: 25%;
+  font-size: var(--btn-m);
   align-self: center;
 }
 
