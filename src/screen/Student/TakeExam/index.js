@@ -73,7 +73,11 @@ const TakeExam = ({ currentExam, userData }) => {
   return (
     <Section>
       {index == 1 && !currentExam.examTaken ? (
-        <Guidelines subjCode={subjectCode} updateIndex={updateIndex} />
+        <Guidelines
+          subjCode={subjectCode}
+          sem={userData.sem}
+          updateIndex={updateIndex}
+        />
       ) : (
         <>
           {!currentExam.examTaken && (

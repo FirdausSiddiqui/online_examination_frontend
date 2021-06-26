@@ -35,7 +35,7 @@ const ExamCard = ({
   return (
     <Card
       bg="light"
-      style={{ width: isMobile ? '15vw' : '18vw' }}
+      style={{ width: isMobile ? '18vw' : '22vw' }}
       className={styles.card}>
       <Card.Img
         variant="top"

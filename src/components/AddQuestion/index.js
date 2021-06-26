@@ -128,7 +128,7 @@ const AddQuestion = ({ question, questionIndex }) => {
                   <Button
                     variant="success"
                     className={`${styles.optionBtn} ${
-                      questionItem?.correctIndex === index &&
+                      questionItem?.correctIndex === index + 1 &&
                       `${styles.correctOption}`
                     }`}
                     onClick={() => handleCorrectOption(index)}>
