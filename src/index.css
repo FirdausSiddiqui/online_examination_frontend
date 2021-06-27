@@ -25,6 +25,13 @@ button {
 }
 .page {
   padding: 2% 3%;
+  min-height: 85vh;
+}
+.page-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .form {
   display: flex;

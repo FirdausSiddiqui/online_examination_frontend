@@ -16,6 +16,8 @@ const UploadQuestion = ({ userData }) => {
   const { questionList, addBlankQuestion, resetPaper } = useQuestions();
   const [paperName, setPaperName] = useState('');
   const [subCode, setSubCode] = useState('');
+  const [hours, setHours] = useState(0);
+  const [mins, setMins] = useState(0);
   const initialQuestionState = {
     title: '',
     options: ['', '', '', ''],
@@ -28,14 +30,31 @@ const UploadQuestion = ({ userData }) => {
       setter: setPaperName,
       label: 'Paper Name',
       id: 'paper-name',
-      placeholder: 'Example: 1st Internal'
+      placeholder: 'Example: 1st Internal',
+      type: 'string',
+      multiple: false
     },
     {
       value: subCode,
       setter: setSubCode,
       label: 'Subject Code',
       id: 'sub-code',
-      placeholder: 'Example: CS101A'
+      placeholder: 'Example: CS101A',
+      type: 'string',
+      multiple: false
+    },
+    {
+      value: hours,
+      setter: setHours,
+      label: 'Hours and Minutes',
+      id: 'paper-time',
+      placeholder: '',
+      placeholder2: '',
+      value2: mins,
+      setter2: setMins,
+      type: 'number',
+      type2: 'number',
+      multiple: true
     }
   ];
 
@@ -46,7 +65,8 @@ const UploadQuestion = ({ userData }) => {
         subjectCode: subCode,
         name: paperName,
         questions: questionList,
-        teacherCode
+        teacherCode,
+        time: hours * 3600 + mins * 60
       })
       .then((response) => {
         showAlert({ message: 'Question uploaded successfully' });
@@ -63,7 +83,8 @@ const UploadQuestion = ({ userData }) => {
         <h3 className="mt-4 mb-2">Question Paper Details</h3>
         <header className={`${styles.questionsHeader} mt-2 mb-2`}>
           {paperDetails.map((detail, index) => {
-            const { id, label, setter, value, placeholder } = detail;
+            const { id, label, setter, value, placeholder, multiple, type } =
+              detail;
             return (
               <InputGroup
                 key={index}
@@ -76,8 +97,27 @@ const UploadQuestion = ({ userData }) => {
                   aria-label={label}
                   aria-describedby={id}
                   value={value}
-                  onChange={(e) => setter(e.target.value)}
+                  onChange={
+                    type === 'number'
+                      ? (e) => setter(e.target.valueAsNumber)
+                      : (e) => setter(e.target.value)
+                  }
+                  type={type}
                 />
+                {multiple && (
+                  <FormControl
+                    placeholder={detail.placeholder2}
+                    aria-label={detail.label}
+                    aria-describedby={id}
+                    value={detail.value2}
+                    onChange={
+                      type === 'number'
+                        ? (e) => detail.setter2(e.target.valueAsNumber)
+                        : (e) => detail.setter2(e.target.value)
+                    }
+                    type={detail.type2}
+                  />
+                )}
               </InputGroup>
             );
           })}
@@ -101,7 +141,11 @@ const UploadQuestion = ({ userData }) => {
             type="submit"
             variant="info"
             className={`mt-4 mb-3 ${styles.submitBtn}`}
-            disabled={subCode === '' || teacherCode === ''}
+            disabled={
+              subCode === '' ||
+              teacherCode === '' ||
+              (hours === 0 && mins === 0)
+            }
             onClick={(e) => submitQuestionPaper(e)}>
             Submit Question Paper
           </Button>

@@ -10,63 +10,47 @@ const StudentDashboard = ({ userData }) => {
   const day = getDay(dateObj);
   const notice = [
     {
-      title: 'Abcd',
+      title: 'Revised schedule of Even Semester 2020-21',
       date: date + month
     },
     {
-      title: 'Abcd',
+      title: 'Project Report Submission for Final Year Details',
       date: date + month
     },
     {
-      title: 'Abcd',
+      title: 'MAR Documents Submission for Final Year Students',
       date: date + month
     },
     {
-      title: 'Abcd',
+      title: '2nd Internal Examination Routine for AY 2020-21',
       date: date + month
     },
     {
-      title: 'Abcd',
+      title: 'Project Report Format for Final Year Students',
       date: date + month
     },
     {
-      title: 'Abcd',
+      title: 'Project Report Submission Date for Final Year Students',
       date: date + month
     },
     {
-      title: 'Abcd',
+      title: 'Revised schedule of Even Semester 2020-21',
       date: date + month
     },
     {
-      title: 'Abcd',
+      title: 'Project Report Submission for Final Year Details',
       date: date + month
     },
     {
-      title: 'Abcd',
+      title: 'MAR Documents Submission for Final Year Students',
       date: date + month
     },
     {
-      title: 'Abcd',
+      title: 'Project Report Submission Date for Final Year Students',
       date: date + month
     },
     {
-      title: 'Abcd',
-      date: date + month
-    },
-    {
-      title: 'Abcd',
-      date: date + month
-    },
-    {
-      title: 'Abcd',
-      date: date + month
-    },
-    {
-      title: 'Abcd',
-      date: date + month
-    },
-    {
-      title: 'Abcd',
+      title: '1st Internal Examination Routine for AY 2020-21',
       date: date + month
     }
   ];
@@ -95,7 +79,7 @@ const StudentDashboard = ({ userData }) => {
       />
       <div className={styles.homeContent}>
         <div className={styles.headerAndDate}>
-          <h1 className={styles.homeHeading}>Welcome {userData?.name}</h1>
+          <h1 className={styles.homeHeading}>Welcome, {userData?.name}!</h1>
           <div className={styles.homeDateContainer}>
             <p className={styles.homeMonth}>{month}</p>
             <p className={styles.homeDay}>{day}</p>
@@ -107,7 +91,11 @@ const StudentDashboard = ({ userData }) => {
             <h1>Notice</h1>
             <div className={styles.noticeDetails}>
               {notice.map((item, index) => {
-                return <p key={index}>{item.title}</p>;
+                return (
+                  <span key={index} className={styles.noticeItem}>
+                    {item.title}
+                  </span>
+                );
               })}
             </div>
           </div>

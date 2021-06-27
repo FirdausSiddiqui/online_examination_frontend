@@ -8,6 +8,7 @@ import QuestionBank from '../screen/QuestionBank';
 import TakeExam from '../screen/Student/TakeExam';
 import UploadQuestion from '../screen/UploadQuestion';
 import NewEntry from '../screen/NewEntry';
+import PageNotFound from '../screen/NotFound';
 
 const AuthorizedRoutes = ({ userType }) => {
   return (
@@ -27,7 +28,7 @@ const AuthorizedRoutes = ({ userType }) => {
         {userType === 'student' && (
           <Route exact path="/auth/takeExam" component={TakeExam} />
         )}
-        <Route component={() => 'Page not found'} />
+        <Route component={PageNotFound} />
       </Switch>
     </Suspense>
   );

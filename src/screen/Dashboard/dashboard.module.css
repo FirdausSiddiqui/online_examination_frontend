@@ -41,6 +41,10 @@
   overflow: scroll;
   height: 55vh;
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 1%;
 }
 
 .homeDateContainer {
@@ -91,7 +95,7 @@
   font-family: cursive;
   padding: 25px;
   align-self: flex-start;
-  font-size: 4rem;
+  font-size: 2.75rem;
   color: white;
   font-weight: bold;
 }
@@ -112,6 +116,18 @@
   border-radius: 50%;
   height: 100%;
   width: 100%;
+}
+
+.noticeItem {
+  background: rgb(228, 211, 211);
+  background: linear-gradient(
+    90deg,
+    rgba(228, 211, 211, 1) 0%,
+    rgba(217, 164, 226, 1) 100%
+  );
+  padding: 8px 5px;
+  border-radius: 4px;
+  box-shadow: 1px 1px 2px 0px var(--black);
 }
 
 @media (max-width: 767px) {
