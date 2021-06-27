@@ -22,6 +22,9 @@ const QuestionSection = ({ userData, currentExam }) => {
     dispatch({
       type: EXAM_STARTED
     });
+    setTimeout(() => {
+      submitAnswers();
+    }, currentExam?.time * 1000);
   }, []);
   const updateIndex = (step) => {
     setQIndex(qIndex + step);
@@ -95,7 +98,7 @@ const QuestionSection = ({ userData, currentExam }) => {
   };
   let filledArray = new Array(questions.length).fill(0);
   const checkCorrectOption = (optIndex) => {
-    if (optIndex + 1 == markedAnswers[qIndex].answerIndex) {
+    if (optIndex + 1 == markedAnswers?.[qIndex]?.answerIndex) {
       if (questions[qIndex].correctIndex - 1 == optIndex) {
         return (
           <Icon name="fas fa-check-circle" className={styles.successIcon} />
@@ -104,7 +107,7 @@ const QuestionSection = ({ userData, currentExam }) => {
         return <Icon name="fas fa-times" className={styles.wrongIcon} />;
       }
     } else {
-      if (optIndex + 1 == questions[qIndex].correctIndex) {
+      if (optIndex + 1 == questions?.[qIndex]?.correctIndex) {
         return (
           <Icon name="fas fa-check-circle" className={styles.successIcon} />
         );

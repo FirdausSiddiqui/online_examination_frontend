@@ -16,11 +16,20 @@ const TakeExam = ({ currentExam, userData }) => {
   const dispatch = useDispatch();
   const { sem, dept } = userData;
   const [index, setIndex] = useState(1);
+  const [timerEnd, setTimerEnd] = useState();
   const updateIndex = (newIndex) => setIndex(newIndex);
-  let today = new Date();
-  let currentExamTime = currentExam?.examTaken ? 0 : currentExam?.time;
-  today.setSeconds(today.getSeconds() + currentExamTime);
-  const DEADLINE = new Date(today);
+
+  const currentExamTimeCalculation = () => {
+    let today = new Date();
+    let currentExamTime = currentExam?.examTaken ? 0 : currentExam?.time;
+    today.setSeconds(today.getSeconds() + currentExamTime);
+    let DEADLINE = new Date(today);
+    setTimerEnd(DEADLINE);
+  };
+
+  useEffect(() => {
+    currentExamTimeCalculation();
+  }, [currentExam]);
 
   useEffect(() => {
     const getCurrentQuestionPaper = async () => {
@@ -71,6 +80,16 @@ const TakeExam = ({ currentExam, userData }) => {
     document.addEventListener('visibilitychange', routeChangeAlert);
   };
   const { subjectCode = '' } = currentExam || '';
+
+  const currentExamMarks = () => {
+    currentExam?.marks?.map((individualMarks) => {
+      if (individualMarks?.roll === userData.roll) {
+        return individualMarks.mark;
+      }
+      return 'There was some error fetching your marks. Please mail us with a screenshot.';
+    });
+  };
+
   return (
     <Section>
       {index == 1 && !currentExam.examTaken ? (
@@ -97,22 +116,27 @@ const TakeExam = ({ currentExam, userData }) => {
                 {addSuffix(Math.ceil(userData.sem / 2))}&nbsp;year
               </p>
               <p>Subject Code:&nbsp;{subjectCode}</p>
+              {currentExam?.examTaken && (
+                <p>Your Marks: {currentExamMarks()}</p>
+              )}
             </div>
             <div className={styles.timer}>
-              <Timer destination={DEADLINE}>
-                {({
-                  days = '00',
-                  hours = '00',
-                  minutes = '00',
-                  seconds = '00'
-                }) => {
-                  return (
-                    <p className={styles.hrsminsec}>
-                      Time left:&nbsp;{hours}:{minutes}:{seconds}
-                    </p>
-                  );
-                }}
-              </Timer>
+              {!currentExam?.examTaken && (
+                <Timer destination={timerEnd}>
+                  {({
+                    days = '00',
+                    hours = '00',
+                    minutes = '00',
+                    seconds = '00'
+                  }) => {
+                    return (
+                      <p className={styles.hrsminsec}>
+                        Time left:&nbsp;{hours}:{minutes}:{seconds}
+                      </p>
+                    );
+                  }}
+                </Timer>
+              )}
             </div>
           </SectionContent>
           <QuestionSection currentExam={currentExam} />
