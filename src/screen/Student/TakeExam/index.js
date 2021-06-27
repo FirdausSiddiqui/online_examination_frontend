@@ -31,6 +31,7 @@ const TakeExam = ({ currentExam, userData }) => {
             type: GET_CURRENT_EXAM,
             payload: res.data
           });
+          console.log(res.data);
         })
         .catch((err) => console.log(err));
     };

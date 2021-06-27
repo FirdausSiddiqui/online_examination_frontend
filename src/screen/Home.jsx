@@ -17,7 +17,7 @@ const Home = () => {
         <Card
           title="Test Spot"
           content="Bringing Teacher and Student together on the same platform."
-          link="#"
+          link="/contact"
           type="learn more"
         />
       </div>

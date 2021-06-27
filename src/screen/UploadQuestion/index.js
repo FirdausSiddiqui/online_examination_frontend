@@ -31,7 +31,7 @@ const UploadQuestion = ({ userData }) => {
       label: 'Paper Name',
       id: 'paper-name',
       placeholder: 'Example: 1st Internal',
-      type: "string",
+      type: 'string',
       multiple: false
     },
     {
@@ -40,7 +40,7 @@ const UploadQuestion = ({ userData }) => {
       label: 'Subject Code',
       id: 'sub-code',
       placeholder: 'Example: CS101A',
-      type: "string",
+      type: 'string',
       multiple: false
     },
     {
@@ -66,7 +66,7 @@ const UploadQuestion = ({ userData }) => {
         name: paperName,
         questions: questionList,
         teacherCode,
-        time: (hours * 3600) + (mins * 60)
+        time: hours * 3600 + mins * 60
       })
       .then((response) => {
         showAlert({ message: 'Question uploaded successfully' });
@@ -83,7 +83,8 @@ const UploadQuestion = ({ userData }) => {
         <h3 className="mt-4 mb-2">Question Paper Details</h3>
         <header className={`${styles.questionsHeader} mt-2 mb-2`}>
           {paperDetails.map((detail, index) => {
-            const { id, label, setter, value, placeholder, multiple, type } = detail;
+            const { id, label, setter, value, placeholder, multiple, type } =
+              detail;
             return (
               <InputGroup
                 key={index}
@@ -96,7 +97,11 @@ const UploadQuestion = ({ userData }) => {
                   aria-label={label}
                   aria-describedby={id}
                   value={value}
-                  onChange={type === 'number'?(e) => setter(e.target.valueAsNumber):(e) => setter(e.target.value)}
+                  onChange={
+                    type === 'number'
+                      ? (e) => setter(e.target.valueAsNumber)
+                      : (e) => setter(e.target.value)
+                  }
                   type={type}
                 />
                 {multiple && (
@@ -105,7 +110,11 @@ const UploadQuestion = ({ userData }) => {
                     aria-label={detail.label}
                     aria-describedby={id}
                     value={detail.value2}
-                    onChange={type === 'number'?(e) => detail.setter2(e.target.valueAsNumber):(e) => detail.setter2(e.target.value)}
+                    onChange={
+                      type === 'number'
+                        ? (e) => detail.setter2(e.target.valueAsNumber)
+                        : (e) => detail.setter2(e.target.value)
+                    }
                     type={detail.type2}
                   />
                 )}
@@ -132,7 +141,11 @@ const UploadQuestion = ({ userData }) => {
             type="submit"
             variant="info"
             className={`mt-4 mb-3 ${styles.submitBtn}`}
-            disabled={subCode === '' || teacherCode === '' || (hours === 0 && mins === 0)}
+            disabled={
+              subCode === '' ||
+              teacherCode === '' ||
+              (hours === 0 && mins === 0)
+            }
             onClick={(e) => submitQuestionPaper(e)}>
             Submit Question Paper
           </Button>
