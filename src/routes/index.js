@@ -15,8 +15,9 @@ const RootRoute = ({ userData }) => {
   const { pathname } = useLocation();
 
   useEffect(() => {
+    let allPathnames = ['/', '/studentLogin', '/teacherLogin', '/login'];
     if (userData.type) {
-      if (pathname === '/studentLogin' || pathname === '/teacherLogin') {
+      if (allPathnames.includes(pathname)) {
         history.replace('/auth/dashboard');
       } else {
         history.replace(pathname);
