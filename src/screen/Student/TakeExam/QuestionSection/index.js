@@ -80,14 +80,11 @@ const QuestionSection = ({ userData, currentExam }) => {
       if (
         questions[questionIndex].correctIndex == markedAnswers[i].answerIndex
       ) {
-        console.log(`Answer ${i + 1} correct`);
         marks = marks + 1;
       } else {
-        console.log(`Answer ${i + 1} wrong`);
       }
       if (i === markedAnswers.length - 1)
         percentage = (marks / totalMarks) * 100;
-      console.log(marks, totalMarks, percentage);
     }
     if (i === markedAnswers.length) updateMarks(percentage);
   };
