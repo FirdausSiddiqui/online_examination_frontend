@@ -81,15 +81,6 @@ const TakeExam = ({ currentExam, userData }) => {
   };
   const { subjectCode = '' } = currentExam || '';
 
-  const currentExamMarks = () => {
-    currentExam?.marks?.map((individualMarks) => {
-      if (individualMarks?.roll === userData.roll) {
-        return individualMarks.mark;
-      }
-      return 'There was some error fetching your marks. Please mail us with a screenshot.';
-    });
-  };
-
   return (
     <Section>
       {index == 1 && !currentExam.examTaken ? (
@@ -117,7 +108,7 @@ const TakeExam = ({ currentExam, userData }) => {
               </p>
               <p>Subject Code:&nbsp;{subjectCode}</p>
               {currentExam?.examTaken && (
-                <p>Your Marks: {currentExamMarks()}</p>
+                <p>Your Marks: {userData.currentExamMarks}</p>
               )}
             </div>
             <div className={styles.timer}>

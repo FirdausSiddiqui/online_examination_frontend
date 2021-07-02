@@ -4,7 +4,8 @@ import {
   CLOSE_DRAWER,
   ROUTE_CHANGE,
   SET_USER_DETAILS,
-  RESET_USER
+  RESET_USER,
+  UPDATE_CURRENT_EXAM_MARKS
 } from '../actions';
 
 export const initialStore = {
@@ -55,7 +56,17 @@ const appData = (store = initialStore, action) => {
     case RESET_USER: {
       return {
         ...store,
-        user: []
+        user: {}
+      };
+    }
+
+    case UPDATE_CURRENT_EXAM_MARKS: {
+      return {
+        ...store,
+        user: {
+          ...store.user,
+          currentExamMarks: action.payload.mark
+        }
       };
     }
 
