@@ -108,7 +108,7 @@ const TakeExam = ({ currentExam, userData }) => {
               </p>
               <p>Subject Code:&nbsp;{subjectCode}</p>
               {currentExam?.examTaken && (
-                <p>Your Marks: {userData.currentExamMarks}</p>
+                <p>Your Marks: {userData.currentExamMarks} %</p>
               )}
             </div>
             <div className={styles.timer}>
