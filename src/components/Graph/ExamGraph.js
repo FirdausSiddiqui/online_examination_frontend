@@ -9,6 +9,7 @@ import {
   ResponsiveContainer
 } from 'recharts';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
+import styles from './graph.module.css';
 
 const ExamGraph = ({ examMarks }) => {
   const { dimensions } = useWindowDimensions();
@@ -42,11 +43,25 @@ const ExamGraph = ({ examMarks }) => {
           unit="%"
           tickLine={false}
         />
-        <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+        <Tooltip cursor={{ strokeDasharray: '3 3' }} content={<CustomTooltip/>}  />
         <Scatter name="Marks" data={examMarks} fill="#8884d8" />
       </ScatterChart>
     </ResponsiveContainer>
   );
+};
+
+const CustomTooltip = ({ payload, label, active }) => {
+  if (active) {
+    return (
+      <div className={styles.customTooltip}>
+        <p>{payload[0]?.payload.name}</p>
+        <p>Roll: {payload[0]?.value}</p>
+        <p className={styles.marks}>{`Marks : ${payload[0]?.payload.mark.toPrecision(4)} %`}</p>
+      </div>
+    );
+  }
+
+  return null;
 };
 
 export default ExamGraph;
